@@ -119,3 +119,44 @@ main:has(#home:not([hidden])) .note-icon{width:46px;height:38px}
  #home .banks{gap:14px}#home .banks button{min-height:86px;font-size:21px}
  #home .banks button[data-bank=fundamentals]{min-height:120px;font-size:26px;margin-bottom:12px}
 }
+/* Landing: a short intro, melody-contour tiles, and one plain description per bank. */
+main:has(#home:not([hidden]))>header{margin-bottom:14px}
+.intro{margin:0 0 30px;color:var(--muted);font-size:16px;line-height:1.45}
+.intro p{margin:0}
+.intro p:first-child{color:var(--ink);font-weight:500}
+.bank-heading{margin:0 0 12px;padding:0 2px;font-size:17px;font-weight:600;letter-spacing:-.2px;color:var(--ink)}
+#home .banks button,#home .banks button[data-bank=fundamentals]{min-height:80px;margin-bottom:0;padding:14px 16px 14px 12px;gap:14px;align-items:center;text-align:left;font-size:17px}
+#home .banks button:after,#home .banks button[data-bank=fundamentals]:after{content:none}
+#home .banks button .bank-icon,#home .banks button[data-bank=fundamentals] .bank-icon{width:70px;height:52px;padding:13px 8px;box-sizing:border-box;border-radius:12px}
+#home .banks button>.bank-text{display:flex;flex-direction:column;gap:3px;min-width:0;font-size:inherit;opacity:1}
+#home .banks button .bank-text b{font-weight:600}
+#home .banks button .bank-text small{font-size:14px;line-height:1.35;color:var(--muted)}
+#home .banks button[data-bank=fundamentals] .bank-text small{color:#3d3127}
+@media(min-width:700px) and (max-width:999px){
+ .intro{font-size:18px;margin-bottom:36px}.bank-heading{font-size:20px;margin-bottom:14px}
+ #home .banks{gap:14px}
+ #home .banks button,#home .banks button[data-bank=fundamentals]{min-height:98px;font-size:20px;padding:16px 20px 16px 16px;gap:18px}
+ #home .banks button .bank-icon,#home .banks button[data-bank=fundamentals] .bank-icon{width:86px;height:64px;padding:16px 10px}
+ #home .banks button .bank-text small{font-size:16px}
+}
+@media(min-width:1000px){
+ main:has(#home:not([hidden])){max-width:1080px;padding:56px 32px}
+ main:has(#home:not([hidden]))>header{margin-bottom:16px}
+ main:has(#home:not([hidden])) h1{font-size:44px;letter-spacing:-1.6px}
+ .intro{font-size:19px;margin-bottom:44px}.bank-heading{font-size:22px;margin-bottom:18px}
+ #home .banks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+ #home .banks button,#home .banks button[data-bank=fundamentals]{flex-direction:column;align-items:stretch;min-height:0;padding:16px 16px 20px;gap:12px;border-radius:22px;font-size:20px}
+ #home .banks button .bank-icon,#home .banks button[data-bank=fundamentals] .bank-icon{width:100%;height:92px;padding:16px 40px;border-radius:14px}
+ #home .banks button .bank-text{gap:6px}
+ #home .banks button .bank-text small{font-size:15px}
+}
+#home .bank-icon{stroke-width:5.5}
+@media(min-width:1000px){#home .bank-icon{stroke-width:3.6}}
+@media(max-width:699px) and (max-height:740px){
+ main:has(#home:not([hidden])){padding-top:20px}
+ .intro{margin-bottom:18px;font-size:15px}.bank-heading{margin-bottom:8px}
+ #home .banks{gap:8px}
+ #home .banks button,#home .banks button[data-bank=fundamentals]{min-height:66px;padding-top:9px;padding-bottom:9px}
+ #home .banks button .bank-icon,#home .banks button[data-bank=fundamentals] .bank-icon{height:46px;padding:11px 8px}
+ #home .banks button .bank-text small{font-size:13px}
+}
