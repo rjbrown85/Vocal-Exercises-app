@@ -52,15 +52,25 @@ make('p6','pop','Minor Pop Turn',[1,3,5,4,3,2,3,1],'',[1,.5,.5,1,.5,.5,1,2],'min
 make('p7','pop','Held Note Release',[6,5,3,2,3,2,1],'',[2,.5,.5,.5,.5,1,2],'major',72),
 make('p8','pop','Rising Sequence',[1,2,3,2,3,4,3,4,5],'',[.5,.5,1,.5,.5,1,.5,.5,2]),
 make('p9','pop','Call and Lift',[3,2,1,3,2,5,6,5],'',[.5,.5,2,.5,.5,1,1,2]),
-make('p10','pop','Chorus Landing',[8,6,5,5,3,2,1],'',[1,.5,.5,1,.5,.5,2],'major',76)
-
+make('p10','pop','Chorus Landing',[8,6,5,5,3,2,1],'',[1,.5,.5,1,.5,.5,2],'major',76) ,
+// Original agility studies with connected turns and deliberate interval changes.
+make('a1','agility','Neighbor Loops',[2,3,2,1,2,3,2,1],'',[.5,.5,.5,.5,.5,.5,1,2],'major',68),
+make('a2','agility','Three-Note Cells',[1,2,3,2,3,4,3,4,5,3,1],'',[.5,.5,.5,.5,.5,.5,.5,.5,1,1,2],'major',64),
+make('a3','agility','Thirds Ladder',[1,3,2,4,3,5,4,6,5,3,1],'',[.5,.5,.5,.5,.5,.5,.5,.5,1,1,2],'major',64),
+make('a4','agility','Pentatonic Zigzag',[1,3,2,5,3,6,5,8,6,5,3,1],'',[.5,.5,.5,.5,.5,.5,.5,.5,.5,.5,1,2],'major',64),
+make('a5','agility','Triplet Climb',[1,2,3,2,3,4,3,4,5,4,3,1],'',[1/3,1/3,1/3,1/3,1/3,1/3,1/3,1/3,1/3,1/3,2/3,2],'major',60),
+make('a6','agility','Descending Cells',[8,7,6,7,6,5,6,5,4,5,3,1],'',[.5,.5,.5,.5,.5,.5,.5,.5,.5,.5,1,2],'major',64),
+make('a7','agility','Minor Weave',[1,2,3,5,4,3,4,2,3,1],'',[.5,.5,.5,.5,.5,.5,.5,.5,1,2],'minor',68),
+make('a8','agility','Arpeggio Turns',[1,3,5,3,2,3,5,8,5,3,2,1],'',[.5,.5,.5,.5,.5,.5,1,1,.5,.5,1,2],'major',64),
+make('a9','agility','Five-Note Ripple',[1,2,3,4,5,4,3,2,3,4,5,3,1],'',[.5,.5,.5,.5,.5,.5,.5,.5,.5,.5,1,1,2],'major',64),
+make('a10','agility','Leap and Settle',[1,5,4,3,2,6,5,4,3,2,1],'',[1,.5,.5,.5,1,.5,.5,.5,.5,1,2],'major',68)
 ];
 function offsets(e,override='auto'){const scale=override==='auto'?e.scale:override;return e.degrees.map((d,i)=>(scale==='minor'?minor:major)[d-1]+(e.alterations?.[i]||0));}
 function bounds(e,low,high,override='auto'){const n=offsets(e,override);return {min:low-Math.min(...n),max:high-Math.max(...n)};}
 function route(min,max,direction,start){if(min>max)return [];const s=Math.max(min,Math.min(max,start??(direction==='down'?max:min)));if(direction==='down')return Array.from({length:s-min+1},(_,i)=>s-i);const up=Array.from({length:max-s+1},(_,i)=>s+i);return direction==='back'?[...up,...Array.from({length:max-min},(_,i)=>max-i-1)]:up;}
 function note(n){return ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'][((n%12)+12)%12]+(Math.floor(n/12)-1);}
 // Note lengths follow the phrase, without moving its rhythmic onsets.
-const connection={bl1:1.01,bl2:1.02,bl3:1.02,bl4:.94,bl5:1.02,bl6:1.01,bl7:1.01,bl8:1.02,bl9:1.01,bl10:1.03,p1:.95,p2:1.02,p3:.92,p4:1.01,p5:.94,p6:1.01,p7:1.03,p8:1.01,p9:.98,p10:1.02,j1:.94,j2:.98,j3:.98,j4:.96,j5:.96,j6:.99,j7:.96,j8:1.01,j9:1.01,j10:.98,r1:1.03,r2:1.03,r3:1.02,r4:1.03,r5:1.03,r6:1.03,r7:1.03,r8:1.02,r9:1.01,r10:1.03,f1:1.02,f2:1.02,f3:.98,f4:.98,f5:1.02,f6:1.02};
+const connection={a1:1.02,a2:1.02,a3:1.01,a4:1.02,a5:1.02,a6:1.02,a7:1.02,a8:1.01,a9:1.02,a10:1.01,bl1:1.01,bl2:1.02,bl3:1.02,bl4:.94,bl5:1.02,bl6:1.01,bl7:1.01,bl8:1.02,bl9:1.01,bl10:1.03,p1:.95,p2:1.02,p3:.92,p4:1.01,p5:.94,p6:1.01,p7:1.03,p8:1.01,p9:.98,p10:1.02,j1:.94,j2:.98,j3:.98,j4:.96,j5:.96,j6:.99,j7:.96,j8:1.01,j9:1.01,j10:.98,r1:1.03,r2:1.03,r3:1.02,r4:1.03,r5:1.03,r6:1.03,r7:1.03,r8:1.02,r9:1.01,r10:1.03,f1:1.02,f2:1.02,f3:.98,f4:.98,f5:1.02,f6:1.02};
 const phraseEnds={bl7:[4]};
 function articulation(e,i,duration,rhythm='original'){
  const final=i===e.degrees.length-1,repeated=!final&&offsets(e)[i]===offsets(e)[i+1],boundary=rhythm==='original'&&(phraseEnds[e.id]||[]).includes(i);

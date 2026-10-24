@@ -27,7 +27,7 @@ input[type=range]::-moz-range-thumb{background:var(--accent);border-color:#fffff
 @media(prefers-reduced-motion:reduce){.ambient i{animation:none;will-change:auto}.ambient,.visual{transition:none}}
 @media(prefers-reduced-transparency:reduce){.workspace,.banks,#theme,.stepper,.seg,.transport button,.under-transport button{background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none}.ambient{display:none}.transport .play{background:var(--accent)}}
 /* Pop bank and always-visible volume. */
-.banks [data-bank=pop]{--bank:#a9dfb5}
+.banks [data-bank=pop]{--bank:#f2a5ce}.banks [data-bank=agility]{--bank:#a9dfb5}
 .volume-control{margin-top:8px}
 .volume-control label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
 .volume-control input{margin:15px 0 10px}
