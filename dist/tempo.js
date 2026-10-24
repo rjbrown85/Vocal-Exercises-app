@@ -3,7 +3,7 @@ const tempoScrub={
  session:0,active:false,osc:null,gain:null,clock:null,position:null,guard:null,
  async start(){
   if(this.active)return;
-  this.active=true;const session=++this.session;
+  this.active=true;const session=++this.session;Sound.hold();
   this.clock=running?phraseClock:null;
   this.position=this.clock?(ctx.currentTime-this.clock.base)/this.clock.beat:null;
   if(this.clock)cancel();
@@ -36,6 +36,7 @@ const tempoScrub={
   if(this.clock&&running&&token===this.guard){
    runPhrase(this.clock.cue,ctx.currentTime+.04-this.position*(60/s.tempo),this.clock);
   }
+  if(!running)Sound.release(600);
   this.clock=null;
  }
 };
