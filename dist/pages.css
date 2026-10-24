@@ -84,3 +84,38 @@ h1:before{content:none}
 @media(min-width:700px) and (max-width:1100px) and (min-height:900px) and (orientation:portrait){#home{margin:auto;max-width:760px}#home .banks{gap:20px}#home .banks button{min-height:118px;padding:24px 32px;font-size:25px}#home .banks button .bank-icon{width:72px;height:58px}}
 @media(max-height:740px){#home .banks{gap:10px}#home .banks button{min-height:74px;padding-top:12px;padding-bottom:12px}#home{margin-top:16px}}
 @media(prefers-reduced-motion:reduce){#home .banks button:hover{transform:none}}
+/* A focused entry screen: one starting choice, followed by quieter categories. */
+main:has(#home:not([hidden])){max-width:660px;min-height:100svh;height:auto;padding:42px 30px;display:flex;flex-direction:column;justify-content:center}
+main:has(#home:not([hidden]))>header{margin:0 0 30px}
+main:has(#home:not([hidden])) h1{font-size:32px;letter-spacing:-1.1px;gap:14px;line-height:1.15}
+main:has(#home:not([hidden])) .brand-icon{width:46px;height:46px;background:transparent;color:#f5bc96;box-shadow:none}
+main:has(#home:not([hidden])) .note-icon{width:46px;height:38px}
+#home{max-width:none;margin:0;width:100%}
+#home .banks{gap:10px;margin:0}
+#home .banks button{min-height:70px;padding:13px 18px;gap:18px;border:1px solid #ffffff0c;background:rgba(37,35,31,.88);border-radius:16px;box-shadow:none;font-size:19px}
+#home .banks button .bank-icon{width:48px;height:42px;padding:5px;border-radius:11px;background:color-mix(in srgb,var(--bank) 10%,#25231f);color:var(--bank);filter:none}
+#home .banks button b{font-weight:500}
+#home .banks button:after{font-size:22px;color:#a9a69d;opacity:.6}
+#home .banks button[aria-pressed=true]{border-color:#ffffff18;box-shadow:none}
+#home .banks button:hover{background:#34322e;border-color:color-mix(in srgb,var(--bank) 32%,transparent);box-shadow:none;transform:none}
+#home .banks button[data-bank=fundamentals]{min-height:100px;margin-bottom:10px;background:linear-gradient(115deg,#f5bc96,#dfaa89);color:#29251f;border:1px solid #ffd4b5;border-radius:20px;box-shadow:0 8px 30px #00000012;font-size:23px}
+#home .banks button[data-bank=fundamentals] .bank-icon{width:58px;height:50px;padding:5px;background:#ffffff26;color:#48392e;border-radius:13px}
+#home .banks button[data-bank=fundamentals] b{font-weight:600}
+#home .banks button[data-bank=fundamentals]:after{color:#48392e;opacity:1;font-size:27px}
+#home .banks button[data-bank=fundamentals]:hover{background:linear-gradient(115deg,#ffccaa,#edb795)}
+@media(max-width:699px){
+ main:has(#home:not([hidden])){padding:26px 22px max(26px,env(safe-area-inset-bottom));justify-content:flex-start}
+ main:has(#home:not([hidden]))>header{margin-bottom:28px}
+ main:has(#home:not([hidden])) h1{font-size:28px;gap:9px}
+ main:has(#home:not([hidden])) .brand-icon{width:38px;height:40px}
+ main:has(#home:not([hidden])) .note-icon{width:38px;height:34px}
+ #home .banks button{min-height:72px;padding:13px 16px;font-size:18px;gap:14px}
+ #home .banks button[data-bank=fundamentals]{min-height:98px;font-size:21px}
+}
+@media(min-width:700px) and (min-height:900px){
+ main:has(#home:not([hidden])){max-width:700px;padding:50px 32px;justify-content:center}
+ main:has(#home:not([hidden]))>header{margin-bottom:40px}
+ main:has(#home:not([hidden])) h1{font-size:36px}
+ #home .banks{gap:14px}#home .banks button{min-height:86px;font-size:21px}
+ #home .banks button[data-bank=fundamentals]{min-height:120px;font-size:26px;margin-bottom:12px}
+}
