@@ -8,26 +8,17 @@ make('f3','fundamentals','Triad arpeggio',[1,3,5,3,1],'Find the space between no
 make('f4','fundamentals','Octave arpeggio',[1,3,5,8,5,3,1],'An octave, one note at a time.'),
 make('f5','fundamentals','Octave scale',[1,2,3,4,5,6,7,8,7,6,5,4,3,2,1],'A full climb and return.'),
 make('f6','fundamentals','Pentatonic run',[1,2,3,5,6,8,6,5,3,2,1],'Five tones. A little more space.'),
-make('b1','boyd','Rolling Phrase',[1,2,4,3,2,5,3],'Keep the line connected.',[.5,.5,1,.5,.5,1,2]),
-make('b2','boyd','Offbeat Entry',[3,3,5,4,2,1],'Come in after the beat.',[.5,1,.5,.5,.5,2]),
-make('b3','boyd','Pentatonic Float',[1,3,2,5,6,5,2,1],'Let the phrase flow.',[1,.5,.5,1,1,.5,.5,2]),
-make('b4','boyd','Minor Turn',[5,7,5,4,3,4,1],'A compact, winding descent.',[1,.5,.5,.5,.5,1,2],'minor'),
-make('b5','boyd','Leap and Unwind',[2,6,5,3,4,2],'Place the leap. Ease down.',[1,1,.5,.5,1,2]),
-make('b6','boyd','Held Note, Quick Tail',[4,5,4,2,3,1],'Hold, then release the run.',[3,.5,.5,.5,.5,2]),
-make('b7','boyd','Neighbor Turn',[3,4,3,2,3,5,2],'A small turn inside the phrase.',[1,.5,.5,.5,.5,1,2]),
-make('b8','boyd','Rising Waves',[1,3,2,2,4,3,3,5,4,2],'Three small waves upward.',[.5,.5,1,.5,.5,1,.5,.5,1,2]),
-make('b9','boyd','Long Arc',[1,2,4,5,8,6,5,3,2],'Shape one long arc.',[1,.5,.5,1,2,.5,.5,1,2],'major',72),
-make('b10','boyd','Short / Long',[2,4,3,5,6,5,3,2,1],'A short call. A flowing answer.',[.5,.5,2,.5,.5,.5,.5,1,2]),
-make('c1','cuomo','Repeated-Note Hook',[3,3,3,5,2,1],'Steady pitch. Clear rhythm.',[.5,.5,1,1,1,2]),
-make('c2','cuomo','Stepwise Answer',[5,4,3,2,3,2,1],'Two phrases, one resolution.',[.5,.5,2,.5,.5,1,2]),
-make('c3','cuomo','Thirds and Steps',[1,3,2,4,3,5,2],'Alternate skips and steps.',[1,.5,.5,1,.5,.5,2]),
-make('c4','cuomo','Pentatonic Hook',[3,5,6,5,2,3,1],'A compact call and answer.',[.5,.5,1,2,.5,.5,2]),
-make('c5','cuomo','Chorus Lift',[1,2,3,6,5,3,2],'A narrow start, a higher answer.',[.5,.5,2,1,.5,.5,2]),
-make('c6','cuomo','Upper-Note Anchor',[5,5,6,5,3,3,2],'Return to the upper anchor.',[.5,.5,1,2,.5,.5,2]),
-make('c7','cuomo','Leap and Resolve',[3,8,6,5,4,2,1],'Land the leap, resolve the line.',[1,2,.5,.5,1,1,2],'major',72),
-make('c8','cuomo','Changed Ending',[1,3,2,1,3,5,2,1],'Same opening. A new ending.',[.5,.5,2,.5,.5,1,1,2]),
-make('c9','cuomo','Minor Hook',[1,3,4,3,5,4,2,1],'A darker melodic shape.',[.5,.5,1,2,.5,.5,1,2],'minor'),
-make('c10','cuomo','Accent Shift',[3,2,5,3,1,3,2,5,3,1],'Same pitches. Shift the accents.',[1,.5,.5,1,2,.5,1,.5,1,2]),
+// Original blues studies using minor pentatonic shapes, blue notes and swing.
+make('bl1','blues','Minor Pentatonic Call',[1,3,4,5,4,3,1],'',[1,2/3,1/3,1,2/3,1/3,2],'minor',72),
+Object.assign(make('bl2','blues','Blue-Note Turn',[4,4,5,4,3,1],'',[2/3,1/3,1,2/3,1/3,2],'minor',68),{alterations:{1:1}}),
+make('bl3','blues','Seventh Descent',[8,7,5,4,3,1],'',[1,2/3,1/3,2/3,1/3,2],'minor',72),
+make('bl4','blues','Repeated Blues Call',[5,5,7,5,4,3,1],'',[.5,.5,1,1,2/3,1/3,2],'minor',76),
+Object.assign(make('bl5','blues','Blue-Note Fall',[5,4,4,3,1],'',[1,2/3,1/3,1,2],'minor',68),{alterations:{1:1}}),
+make('bl6','blues','Triplet Blues Turn',[5,4,3,4,3,1,3,1],'',[1/3,1/3,1/3,1/3,1/3,1/3,1,2],'minor',64),
+make('bl7','blues','Call and Low Answer',[1,3,5,7,5,3,4,3,1],'',[2/3,1/3,1,1,1,2/3,1/3,1,2],'minor',72),
+Object.assign(make('bl8','blues','Third Color Turn',[3,3,5,3,3,1],'',[2/3,1/3,1,2/3,1/3,2],'major',68),{alterations:{0:-1,4:-1}}),
+Object.assign(make('bl9','blues','Sixth and Flat Seventh',[1,3,5,6,7,6,5,3,1],'',[2/3,1/3,2/3,1/3,1,2/3,1/3,1,2],'major',72),{alterations:{4:-1}}),
+Object.assign(make('bl10','blues','Held Note Blues Tail',[5,7,5,4,4,3,1],'',[2,.5,.5,.5,.5,1,2],'minor',64),{alterations:{3:1}}),
 // Original R&B studies built from common pentatonic and melismatic vocabulary.
 make('r1','rnb','Pentatonic Fall',[6,5,3,2,1],'A compact major-pentatonic descent.',[1,.5,.5,1,2],'major',72),
 make('r2','rnb','Minor Soul Run',[8,7,5,4,3,1],'Minor-pentatonic descent.',[1,.5,.5,.5,.5,2],'minor',72),
@@ -69,15 +60,15 @@ function bounds(e,low,high,override='auto'){const n=offsets(e,override);return {
 function route(min,max,direction,start){if(min>max)return [];const s=Math.max(min,Math.min(max,start??(direction==='down'?max:min)));if(direction==='down')return Array.from({length:s-min+1},(_,i)=>s-i);const up=Array.from({length:max-s+1},(_,i)=>s+i);return direction==='back'?[...up,...Array.from({length:max-min},(_,i)=>max-i-1)]:up;}
 function note(n){return ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'][((n%12)+12)%12]+(Math.floor(n/12)-1);}
 // Note lengths follow the phrase, without moving its rhythmic onsets.
-const connection={p1:.95,p2:1.02,p3:.92,p4:1.01,p5:.94,p6:1.01,p7:1.03,p8:1.01,p9:.98,p10:1.02,j1:.94,j2:.98,j3:.98,j4:.96,j5:.96,j6:.99,j7:.96,j8:1.01,j9:1.01,j10:.98,r1:1.03,r2:1.03,r3:1.02,r4:1.03,r5:1.03,r6:1.03,r7:1.03,r8:1.02,r9:1.01,r10:1.03,f1:1.02,f2:1.02,f3:.98,f4:.98,f5:1.02,f6:1.02,b1:1.03,b2:.9,b3:1.03,b4:1.02,b5:1.02,b6:1.03,b7:1.03,b8:1.02,b9:1.03,b10:1.02,c1:.9,c2:1.01,c3:1.01,c4:.98,c5:1.01,c6:.9,c7:1.02,c8:.96,c9:1,c10:.9};
-const phraseEnds={b8:[2,5],b10:[2],c2:[2],c4:[3],c5:[2],c8:[2],c9:[3],c10:[4]};
+const connection={bl1:1.01,bl2:1.02,bl3:1.02,bl4:.94,bl5:1.02,bl6:1.01,bl7:1.01,bl8:1.02,bl9:1.01,bl10:1.03,p1:.95,p2:1.02,p3:.92,p4:1.01,p5:.94,p6:1.01,p7:1.03,p8:1.01,p9:.98,p10:1.02,j1:.94,j2:.98,j3:.98,j4:.96,j5:.96,j6:.99,j7:.96,j8:1.01,j9:1.01,j10:.98,r1:1.03,r2:1.03,r3:1.02,r4:1.03,r5:1.03,r6:1.03,r7:1.03,r8:1.02,r9:1.01,r10:1.03,f1:1.02,f2:1.02,f3:.98,f4:.98,f5:1.02,f6:1.02};
+const phraseEnds={bl7:[4]};
 function articulation(e,i,duration,rhythm='original'){
  const final=i===e.degrees.length-1,repeated=!final&&offsets(e)[i]===offsets(e)[i+1],boundary=rhythm==='original'&&(phraseEnds[e.id]||[]).includes(i);
  let gate=connection[e.id]||.98;
  if(repeated)gate=.82;
  if(boundary)gate=.86;
  if(final)gate=.92;
- return {duration:duration*gate,release:Math.min(.16,duration*(repeated||boundary?.14:.32)),velocity:e.id==='c10'&&i>=5?.65:gate>=.98?.44:.5};
+ return {duration:duration*gate,release:Math.min(.16,duration*(repeated||boundary?.14:.32)),velocity:gate>=.98?.44:.5};
 }
 const api={exercises,offsets,bounds,route,note,articulation};root.Vocal=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);
