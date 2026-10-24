@@ -159,3 +159,12 @@ body{background:color-mix(in srgb,var(--accent) 16%,#1c1b18);transition:backgrou
 body:has(#home:not([hidden])){background:#1c1b18}
 body:has(#home:not([hidden])) .ambient{color:#8a8170}
 body:has(#practice:not([hidden])) .ambient{opacity:.85}
+/* Moving between the menu and practice: the new screen slides in a little and fades up. */
+main.nav-anim>header{animation:nav-fade .28s ease-out}
+main.nav-anim[data-nav=forward]>section:not([hidden]){animation:nav-from-right .32s cubic-bezier(.2,.8,.2,1)}
+main.nav-anim[data-nav=back]>section:not([hidden]){animation:nav-from-left .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes nav-fade{from{opacity:0}}
+@keyframes nav-from-right{from{opacity:0;transform:translateX(22px)}}
+@keyframes nav-from-left{from{opacity:0;transform:translateX(-22px)}}
+@media(prefers-reduced-motion:reduce){main.nav-anim>header,main.nav-anim>section:not([hidden]){animation:nav-fade .15s ease-out}}
+body{overflow-x:clip}
