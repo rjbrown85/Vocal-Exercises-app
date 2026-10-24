@@ -42,3 +42,45 @@ h1:before{background:var(--accent)}
 }
 @media(pointer:coarse) and (min-width:1000px) and (min-height:650px) and (orientation:landscape){#practice{flex:1;display:flex;flex-direction:column;min-height:0}.practice-heading{flex-shrink:0}#home{margin:auto}}
 @media(prefers-reduced-transparency:reduce){#home .banks button{background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none}}
+/* Custom beamed-note marks, with each bank retaining its own musical shape. */
+.icon-library{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+h1:before{content:none}
+.brand-icon{display:grid;place-items:center;width:42px;height:42px;flex-shrink:0;background:var(--accent);color:#343630;border-radius:13px;box-shadow:inset 0 1px 1px #ffffffa0}
+.note-icon{width:34px;height:30px}
+.category-icon{width:38px;height:32px;color:var(--accent);flex-shrink:0;margin-right:-8px}
+#home{max-width:760px;margin:22px auto}
+#home .banks{gap:14px}
+#home .banks button{position:relative;min-height:82px;padding:16px 26px;gap:22px;font-size:21px;border-radius:21px;background:color-mix(in srgb,var(--bank) 11%,var(--surface));border:1px solid color-mix(in srgb,var(--bank) 45%,var(--edge));box-shadow:inset 0 1px 0 #ffffff25,0 6px 26px color-mix(in srgb,var(--bank) 15%,transparent);transition:background .25s,box-shadow .25s,transform .25s}
+#home .banks button:before{content:none}
+#home .banks button .bank-icon{display:block;width:58px;height:48px;flex-shrink:0;color:var(--bank);filter:drop-shadow(0 2px 10px color-mix(in srgb,var(--bank) 25%,transparent))}
+#home .banks button b{font-weight:550}
+#home .banks button[aria-pressed=true]{border-color:var(--bank);box-shadow:inset 0 1px 0 #ffffff40,0 5px 30px color-mix(in srgb,var(--bank) 24%,transparent)}
+#home .banks button:hover{background:color-mix(in srgb,var(--bank) 20%,var(--surface));box-shadow:0 7px 34px color-mix(in srgb,var(--bank) 26%,transparent);transform:translateY(-1px)}
+/* Light glass uses solid readable foregrounds and restrained colored edges. */
+:root[data-theme=light]{--paper:#f4f2ed;--surface:#fffefb;--ink:#292d30;--muted:#555b60;--edge:#d9d8d1;--glass-panel:rgba(255,254,251,.96);--glass-control:#fffefb;--glass-line:#d6d6d0;--glass-shadow:0 12px 36px #353d4b10}
+[data-theme=light] .ambient{opacity:.48}
+[data-theme=light] .workspace{background:var(--glass-panel);border-color:#d6d6d0;box-shadow:inset 0 1px 0 white,var(--glass-shadow)}
+[data-theme=light] .controls{background:#f8f7f2}
+[data-theme=light] #home .banks button{background:color-mix(in srgb,var(--bank) 20%,#fffefb);border-color:color-mix(in srgb,var(--bank) 55%,#c5c6bd);box-shadow:inset 0 1px 0 #fff,0 7px 26px color-mix(in srgb,var(--bank) 32%,transparent)}
+[data-theme=light] #home .banks button .bank-icon{color:color-mix(in srgb,var(--bank) 45%,#293238);filter:none}
+[data-theme=light] #home .banks button:hover{background:color-mix(in srgb,var(--bank) 32%,#fffefb)}
+[data-theme=light] .category-icon{color:color-mix(in srgb,var(--accent) 40%,#293238)}
+[data-theme=light] .visual{background:color-mix(in srgb,var(--accent) 28%,#fffefb);border-color:color-mix(in srgb,var(--accent) 45%,#c5c6bd)}
+[data-theme=light] .seg{background:#ecece5;border-color:#d0d2c9}
+[data-theme=light] .seg button[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 55%,#fffefb);box-shadow:0 1px 4px #30362920}
+[data-theme=light] input[type=range]{background:#b8beb2}
+[data-theme=light] input[type=range]::-webkit-slider-thumb{border:1px solid #858d80}
+[data-theme=light] input[type=range]::-moz-range-thumb{border:1px solid #858d80}
+[data-theme=light] .key{background:#fffefb;border-color:#bfc1b6}
+[data-theme=light] .key.black{background:#343832}
+[data-theme=light] .key.active{background:var(--accent)}
+[data-theme=light] .key span{color:#424940}
+[data-theme=light] .key.black span{color:#fff}
+@media(max-width:699px){
+ .brand-icon{width:36px;height:36px;border-radius:11px}.note-icon{width:30px;height:27px}
+ #home{margin:22px auto}#home .banks{gap:12px}#home .banks button{min-height:86px;padding:16px 20px;gap:18px;font-size:20px}#home .banks button .bank-icon{width:52px;height:44px}
+ .practice-heading{gap:10px}.category-icon{width:30px;height:28px;margin:0}.practice-heading h2{font-size:18px}
+}
+@media(min-width:700px) and (max-width:1100px) and (min-height:900px) and (orientation:portrait){#home{margin:auto;max-width:760px}#home .banks{gap:20px}#home .banks button{min-height:118px;padding:24px 32px;font-size:25px}#home .banks button .bank-icon{width:72px;height:58px}}
+@media(max-height:740px){#home .banks{gap:10px}#home .banks button{min-height:74px;padding-top:12px;padding-bottom:12px}#home{margin-top:16px}}
+@media(prefers-reduced-motion:reduce){#home .banks button:hover{transform:none}}
