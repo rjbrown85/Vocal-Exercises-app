@@ -50,7 +50,18 @@ make('j6','jazz','Triplet Arpeggio',[1,3,5,3,5,7,5,3,1],'Three-note chord-tone g
 make('j7','jazz','Swing Turnaround',[3,5,6,5,3,2,3,1],'A short turn with a tonic landing.',[2/3,1/3,1,2/3,1/3,2/3,1/3,2],'major',76),
 Object.assign(make('j8','jazz','Third Enclosure',[4,3,3,5,3,2,1],'Approach the major third from above and a semitone below.',[2/3,1/3,1,2/3,1/3,1,2],'major',68),{alterations:{1:-1}}),
 Object.assign(make('j9','jazz','Chromatic Fifth Approach',[4,4,5,3,2,1],'Raise the fourth into the fifth.',[2/3,1/3,1,2/3,1/3,2],'major',68),{alterations:{1:1}}),
-make('j10','jazz','Descending Jazz Line',[8,7,6,5,4,3,2,3,1],'A swung scale descent with a final turn.',[2/3,1/3,2/3,1/3,2/3,1/3,2/3,1/3,2],'major',76)
+make('j10','jazz','Descending Jazz Line',[8,7,6,5,4,3,2,3,1],'A swung scale descent with a final turn.',[2/3,1/3,2/3,1/3,2/3,1/3,2/3,1/3,2],'major',76),
+// Original pop studies: repeated hooks, pentatonic shapes and chorus lifts.
+make('p1','pop','Hook and Answer',[3,3,2,3,5,3,2,1],'',[.5,.5,.5,.5,1,1,1,2]),
+make('p2','pop','Chorus Rise',[1,2,3,5,6,5,3],'',[.5,.5,1,.5,.5,2,2]),
+make('p3','pop','Pentatonic Bounce',[1,3,3,2,5,5,3,1],'',[.5,.5,1,.5,.5,1,1,2]),
+make('p4','pop','Octave Lift',[3,5,8,8,6,5,3,2],'',[1,1,.5,.5,1,.5,.5,2],'major',72),
+make('p5','pop','Syncopated Hook',[5,5,3,2,3,5,2,1],'',[.75,.25,1,.5,.5,1,1,2]),
+make('p6','pop','Minor Pop Turn',[1,3,5,4,3,2,3,1],'',[1,.5,.5,1,.5,.5,1,2],'minor',76),
+make('p7','pop','Held Note Release',[6,5,3,2,3,2,1],'',[2,.5,.5,.5,.5,1,2],'major',72),
+make('p8','pop','Rising Sequence',[1,2,3,2,3,4,3,4,5],'',[.5,.5,1,.5,.5,1,.5,.5,2]),
+make('p9','pop','Call and Lift',[3,2,1,3,2,5,6,5],'',[.5,.5,2,.5,.5,1,1,2]),
+make('p10','pop','Chorus Landing',[8,6,5,5,3,2,1],'',[1,.5,.5,1,.5,.5,2],'major',76)
 
 ];
 function offsets(e,override='auto'){const scale=override==='auto'?e.scale:override;return e.degrees.map((d,i)=>(scale==='minor'?minor:major)[d-1]+(e.alterations?.[i]||0));}
@@ -58,7 +69,7 @@ function bounds(e,low,high,override='auto'){const n=offsets(e,override);return {
 function route(min,max,direction,start){if(min>max)return [];const s=Math.max(min,Math.min(max,start??(direction==='down'?max:min)));if(direction==='down')return Array.from({length:s-min+1},(_,i)=>s-i);const up=Array.from({length:max-s+1},(_,i)=>s+i);return direction==='back'?[...up,...Array.from({length:max-min},(_,i)=>max-i-1)]:up;}
 function note(n){return ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'][((n%12)+12)%12]+(Math.floor(n/12)-1);}
 // Note lengths follow the phrase, without moving its rhythmic onsets.
-const connection={j1:.94,j2:.98,j3:.98,j4:.96,j5:.96,j6:.99,j7:.96,j8:1.01,j9:1.01,j10:.98,r1:1.03,r2:1.03,r3:1.02,r4:1.03,r5:1.03,r6:1.03,r7:1.03,r8:1.02,r9:1.01,r10:1.03,f1:1.02,f2:1.02,f3:.98,f4:.98,f5:1.02,f6:1.02,b1:1.03,b2:.9,b3:1.03,b4:1.02,b5:1.02,b6:1.03,b7:1.03,b8:1.02,b9:1.03,b10:1.02,c1:.9,c2:1.01,c3:1.01,c4:.98,c5:1.01,c6:.9,c7:1.02,c8:.96,c9:1,c10:.9};
+const connection={p1:.95,p2:1.02,p3:.92,p4:1.01,p5:.94,p6:1.01,p7:1.03,p8:1.01,p9:.98,p10:1.02,j1:.94,j2:.98,j3:.98,j4:.96,j5:.96,j6:.99,j7:.96,j8:1.01,j9:1.01,j10:.98,r1:1.03,r2:1.03,r3:1.02,r4:1.03,r5:1.03,r6:1.03,r7:1.03,r8:1.02,r9:1.01,r10:1.03,f1:1.02,f2:1.02,f3:.98,f4:.98,f5:1.02,f6:1.02,b1:1.03,b2:.9,b3:1.03,b4:1.02,b5:1.02,b6:1.03,b7:1.03,b8:1.02,b9:1.03,b10:1.02,c1:.9,c2:1.01,c3:1.01,c4:.98,c5:1.01,c6:.9,c7:1.02,c8:.96,c9:1,c10:.9};
 const phraseEnds={b8:[2,5],b10:[2],c2:[2],c4:[3],c5:[2],c8:[2],c9:[3],c10:[4]};
 function articulation(e,i,duration,rhythm='original'){
  const final=i===e.degrees.length-1,repeated=!final&&offsets(e)[i]===offsets(e)[i+1],boundary=rhythm==='original'&&(phraseEnds[e.id]||[]).includes(i);

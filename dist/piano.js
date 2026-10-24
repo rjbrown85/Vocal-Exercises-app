@@ -33,6 +33,12 @@ class SamplePiano {
     gain.gain.exponentialRampToValueAtTime(.0001,time+Math.max(.02,duration)+release);
     source.start(time,Math.min(Math.max(0,offset)*source.playbackRate.value,Math.max(0,buffer.duration-.01)));source.stop(time+Math.max(.02,duration)+release+.02);
     source.addEventListener('ended',()=>{source.disconnect();gain.disconnect()},{once:true});
+    source.fadeOut=()=>{
+      const now=this.context.currentTime;
+      gain.gain.cancelAndHoldAtTime(now);
+      gain.gain.linearRampToValueAtTime(0,now+.025);
+      source.stop(now+.03);
+    };
     return source;
   }
 }

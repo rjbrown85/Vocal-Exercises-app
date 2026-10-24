@@ -1,6 +1,6 @@
 # Vocal Exercises
 
-A minimal piano-backed vocal practice app with 46 original exercises, light and dark themes, and responsive phone, tablet, and desktop layouts.
+A minimal piano-backed vocal practice app with 56 original exercises, light and dark themes, and responsive phone, tablet, and desktop layouts.
 
 ## Practice
 
