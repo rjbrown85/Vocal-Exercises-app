@@ -2,6 +2,7 @@
 const tempoScrub={
  session:0,active:false,osc:null,gain:null,clock:null,position:null,guard:null,
  async start(){
+  if(typeof isTimed==='function'&&isTimed())return;
   if(this.active)return;
   this.active=true;const session=++this.session;Sound.hold();
   this.clock=running?phraseClock:null;

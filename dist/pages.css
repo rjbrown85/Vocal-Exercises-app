@@ -247,3 +247,21 @@ main:has(#home:not([hidden])) h1{font-size:28px;letter-spacing:-.8px}
 .practice-tip a{color:var(--accent)}
 .sound-credit{font-size:12px;line-height:1.5}
 @media(max-width:699px){#training-guidance{font-size:13px;margin-bottom:10px}.practice-heading h2{font-size:19px}.practice-heading{gap:8px}}
+/* Breathing protocols use a phase timer instead of a pitch graph. */
+#breath-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:260px;padding:24px;border-radius:16px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));border:1px solid var(--glass-line);text-align:center}
+#breath-visual[hidden]{display:none}
+#breath-phase{margin:0;font-size:24px;font-weight:500}
+#breath-count{font-size:58px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.1}
+#breath-detail,#breath-cycle{font-size:13px;color:var(--muted)}
+#breath-progress{width:min(100%,280px);height:7px;accent-color:var(--accent);border:0;border-radius:8px;overflow:hidden}
+#breath-progress::-webkit-progress-bar{background:#ffffff19}
+#breath-progress::-webkit-progress-value{background:var(--accent)}
+.is-timed .visual,.is-timed .keyboard,.is-timed #hold,.is-timed .range-label,.is-timed .presets,.is-timed .range-notes,.is-timed .fine>label,.is-timed .direction-option{display:none!important}
+.is-timed .transport{grid-template-columns:1fr}
+.is-timed .controls{display:block}
+.is-timed .controls>.tempo-heading{margin-top:0}
+.is-timed .controls>.volume-control{margin-top:24px;display:block}
+.seconds-timer #tempo,.seconds-timer .tempo-heading>label,.seconds-timer #tempoValue{display:none!important}
+@media(min-width:700px) and (max-width:1000px){.is-timed .player{display:flex;flex-direction:column}.is-timed #breath-visual{flex:1}}
+@media(max-width:699px){#breath-visual{min-height:230px}.is-timed .controls{padding-top:16px}.is-timed .controls>.volume-control{margin-top:14px}}
+.is-timed #metronome{min-height:44px;padding:10px 14px;font-size:13px;border:1px solid var(--glass-line);border-radius:12px}

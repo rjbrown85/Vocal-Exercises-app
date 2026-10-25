@@ -29,8 +29,6 @@
 // Training uses the same player, with a brief instruction for each exercise.
 document.querySelectorAll('[data-training]').forEach(button=>{
  button.onclick=()=>{
-  const e=M.exercises.find(e=>e.bank===button.dataset.training);
-  change({bank:e.bank,id:e.id,tempo:120,start:'auto'});
-  showPractice();
+  selectBank(button.dataset.training);
  };
 });

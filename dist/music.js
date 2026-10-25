@@ -79,11 +79,11 @@ make("mix1","mix","Lip-trill bridge",[1, 3, 5, 3, 1],"Follow the notes with a lo
 make("mix2","mix","Ng to oo",[1, 3, 5, 3, 1],"Use “ng” as in “sing” on the first two notes. Open gently to “oo” for the rest.",[2, 2, 2, 1, 3]),
 make("mix3","mix","Light noo climb",[1, 2, 3, 4, 5, 4, 3, 2, 1],"Sing “noo” with a small, rounded vowel. Allow the upper notes to feel lighter.",null),
 make("mix4","mix","Woo fifth glide",[1, 5, 1],"Slide gently on “woo” between the piano targets. Keep the slide quiet and unforced.",[2, 2, 3]),
-make("mix5","mix","Gentle mum arc",[1, 3, 5, 6, 5, 3, 1],"Use a light “mum” on each note. Reduce weight rather than adding volume at the peak.",[1, 1, 1, 2, 1, 1, 3]),
+make("mix5","mix","Gentle mum arc",[1, 3, 4, 5, 4, 3, 1],"Use a light “mum” on each note. Reduce weight rather than adding volume at the peak.",[1, 1, 1, 2, 1, 1, 3]),
 make("mix6","mix","Vowel bridge",[1, 3, 5, 3, 1],"Sing “mee, mee, moo, moo, moo.” Change the vowel without tightening your jaw.",[2, 1, 2, 1, 3]),
-make("mix7","mix","Descending lightness",[6, 5, 3, 2, 1],"Start with an easy “oo” and descend. Keep that light feeling as the notes get lower.",[2, 1, 1, 1, 3]),
+make("mix7","mix","Descending lightness",[5, 4, 3, 2, 1],"Start with an easy “oo” and descend. Keep that light feeling as the notes get lower.",[2, 1, 1, 1, 3]),
 make("mix8","mix","Connected thirds",[1, 3, 2, 4, 3, 5, 3, 1],"Sing “yu” gently on each note. Keep the small jumps connected.",[1, 1, 1, 1, 1, 2, 1, 3]),
-make("mix9","mix","Light octave arc",[1, 3, 5, 8, 5, 3, 1],"Use a lip trill or “oo.” Allow a register change at the top instead of forcing the same weight.",[1, 1, 1, 2, 1, 1, 3]),
+make("mix9","mix","Bridge arpeggio",[1, 3, 4, 5, 4, 3, 1],"Use a lip trill or “oo.” Let the sound adjust through the bridge instead of forcing the same weight.",[1, 1, 1, 2, 1, 1, 3]),
 make("mix10","mix","Bridge and settle",[1, 2, 3, 5, 3, 2, 1],"Sing a light “noo,” then settle gently onto the last note. Avoid getting louder on the way up.",[1, 1, 1, 2, 1, 1, 4]),
 make("head1","head","Quiet woo hold",[1],"Sing a light “woo” at a comfortable upper pitch. Use only as much air as the tone needs.",[5]),
 make("head2","head","Oo descent",[5, 4, 3, 2, 1],"Sing softly on “oo.” Keep the downward line connected without making it heavy.",[1, 1, 1, 1, 3]),
@@ -105,18 +105,40 @@ make("belt7","belt","Clear vowel turn",[1, 2, 3, 2, 1],"Sing “yeah” lightly 
 make("belt8","belt","Moderate call",[1, 3, 5, 3, 1],"Sing a friendly “hey” as if addressing someone nearby. Stop the climb before you need to shout.",[1, 1, 2, 1, 3]),
 make("belt9","belt","Small dynamic arc",[1],"Hold “eh” at an easy pitch. Grow slightly from soft to moderate, then return to soft.",[6]),
 make("belt10","belt","Release to hum",[3, 2, 1],"Sing “meh, meh, mm.” Finish with a quiet hum and let your speaking voice feel easy again.",[2, 2, 4]),
-make("breath1","breath","Steady vv",[1],"Take an easy breath, then sustain a voiced “vv.” Aim for an even buzz without squeezing your ribs.",[6]),
-make("breath2","breath","Steady zz",[1],"Sustain a gentle, pitched “zz.” Keep the sound even and release while you still have air.",[8]),
-make("breath3","breath","Straw tone",[1],"Phonate gently through a plain drinking straw into the air, matching the pitch. Use “oo” if no straw is handy.",[6]),
-make("breath4","breath","Hum to vowel hold",[1, 1],"Hum the first note, then sing “oo” on the second. Keep the airflow comfortable through the change.",[3, 5]),
-make("breath5","breath","One-breath steps",[1, 2, 3, 2, 1],"Sing a connected “oo” on an easy breath. Breathe early if needed, then try a shorter range.",[1, 1, 2, 1, 3]),
-make("breath6","breath","Vowel continuity",[1, 1, 1],"Sing “ee, oh, oo” at one pitch. Keep an even tone as the mouth changes shape.",[2, 2, 3]),
+{"id": "breath1", "bank": "breath", "name": "Easy breath cycle", "degrees": [], "hint": "Breathe in gently for 3 seconds, out for 5, then breathe normally for 4. Do not fill to maximum. Pause if you feel lightheaded.", "rhythm": null, "scale": "major", "tempo": 120, "timer": {"unit": "seconds", "cycles": 3, "phases": [{"label": "Breathe in", "length": 3}, {"label": "Breathe out", "length": 5}, {"label": "Breathe normally", "length": 4}]}},
+{"id": "breath2", "bank": "breath", "name": "Steady hiss", "degrees": [], "hint": "Inhale comfortably for 3 seconds. Hiss softly for 6, then take 4 seconds of normal breathing. Stop the hiss early if needed. Pause if you feel lightheaded.", "rhythm": null, "scale": "major", "tempo": 120, "timer": {"unit": "seconds", "cycles": 3, "phases": [{"label": "Breathe in", "length": 3}, {"label": "Hiss gently", "length": 6}, {"label": "Breathe normally", "length": 4}]}},
+{"id": "breath3", "bank": "breath", "name": "One-bar exhale", "degrees": [], "hint": "Inhale for one bar, exhale gently for one bar, then breathe normally for one bar. Each bar has four clicks. Pause if you feel lightheaded.", "rhythm": null, "scale": "major", "tempo": 120, "timer": {"unit": "beats", "cycles": 3, "phases": [{"label": "Breathe in", "length": 4}, {"label": "Breathe out", "length": 4}, {"label": "Breathe normally", "length": 4}]}},
+{"id": "breath4", "bank": "breath", "name": "Two-bar hiss", "degrees": [], "hint": "Take one bar to inhale, hiss steadily for two bars, then breathe normally for two bars. Keep the air easy. Pause if you feel lightheaded.", "rhythm": null, "scale": "major", "tempo": 120, "timer": {"unit": "beats", "cycles": 3, "phases": [{"label": "Breathe in", "length": 4}, {"label": "Hiss gently", "length": 8}, {"label": "Breathe normally", "length": 8}]}},
+{"id": "breath5", "bank": "breath", "name": "Gentle s pulses", "degrees": [], "hint": "Inhale for one bar. Make one light “s” on each of the next four clicks, then breathe normally for two bars. Avoid forceful abdominal pumping. Pause if you feel lightheaded.", "rhythm": null, "scale": "major", "tempo": 120, "timer": {"unit": "beats", "cycles": 3, "phases": [{"label": "Breathe in", "length": 4}, {"label": "Pulse s", "length": 4}, {"label": "Breathe normally", "length": 8}]}},
+{"id": "breath6", "bank": "breath", "name": "Timed lip trill", "degrees": [], "hint": "Inhale gently for 3 seconds. Trill at any comfortable pitch for 5 seconds, then breathe normally for 4. Use “vv” if preferred. Pause if you feel lightheaded.", "rhythm": null, "scale": "major", "tempo": 120, "timer": {"unit": "seconds", "cycles": 3, "phases": [{"label": "Breathe in", "length": 3}, {"label": "Trill gently", "length": 5}, {"label": "Breathe normally", "length": 4}]}},
 make("breath7","breath","Long-tone balance",[1],"Hold “oh” gently and evenly. At slower tempos, release early rather than running out of breath.",[8]),
 make("breath8","breath","Gentle swell",[1],"Sustain “oo,” growing slightly louder and then softer. Keep the pitch steady throughout.",[8]),
 make("breath9","breath","Sustained descent",[5, 3, 2, 1],"Sing “voo” with connected notes. Let the phrase end naturally before your breath feels depleted.",[2, 2, 2, 4]),
 make("breath10","breath","Even phrase",[1, 2, 3, 5, 3, 2, 1],"Use a smooth “oo” across the phrase. Take a quiet breath before the next chord, or pause when needed.",[1, 1, 1, 2, 1, 1, 3])
 ];
 const trainingBanks={"chest": {"name": "Chest Voice", "color": "#92cefb", "icon": "blues", "tip": "Stay near an easy speaking range. Keep the sound clear, not loud."}, "mix": {"name": "Mix", "color": "#c8b1ed", "icon": "jazz", "tip": "Let the sound lighten as pitch rises. Do not force one register upward."}, "head": {"name": "Head Voice & Falsetto", "color": "#f2a5ce", "icon": "pop", "tip": "Use a light, easy upper register. Head voice and falsetto may feel different."}, "belt": {"name": "Belting", "color": "#f5bc96", "icon": "fundamentals", "tip": "Warm up first. These are moderate-volume belt foundations, not maximum-power drills."}, "breath": {"name": "Breath & Sustain", "color": "#a9dfb5", "icon": "agility", "tip": "Take an easy breath. Finish before you run out of air and breathe whenever needed."}};
+
+// Practice presets, not measurements of a singer's register. MIDI 60 is C4.
+const rangePresets={
+ general:{baritone:[43,72],tenor:[48,76]},
+ chest:{baritone:[43,58],tenor:[48,60]},
+ mix:{baritone:[57,65],tenor:[60,69]},
+ head:{baritone:[64,77],tenor:[65,79]},
+ belt:{baritone:[48,64],tenor:[50,67]},
+ breath:{baritone:[48,60],tenor:[50,62]}
+};
+const rangeGroup=bank=>rangePresets[bank]?bank:'general';
+const rangeLimit=bank=>bank==='belt'?72:84;
+function presetRange(bank,voice='baritone'){
+ const type=voice==='tenor'?'tenor':'baritone', [low,high]=rangePresets[rangeGroup(bank)][type];
+ return {low,high,preset:type};
+}
+function storedRange(bank,voice,saved){
+ const low=Number(saved?.low),high=Number(saved?.high);
+ if(!Number.isInteger(low)||!Number.isInteger(high)||low<36||high>rangeLimit(bank)||low>=high||!['baritone','tenor','custom'].includes(saved?.preset))return presetRange(bank,voice);
+ return {low,high,preset:saved.preset};
+}
+
 function offsets(e,override='auto'){const scale=override==='auto'?e.scale:override;return e.degrees.map((d,i)=>(scale==='minor'?minor:major)[d-1]+(e.alterations?.[i]||0));}
 function bounds(e,low,high,override='auto'){const n=offsets(e,override);return {min:low-Math.min(...n),max:high-Math.max(...n)};}
 function route(min,max,direction,start){if(min>max)return [];const s=Math.max(min,Math.min(max,start??(direction==='down'?max:min)));if(direction==='down')return Array.from({length:s-min+1},(_,i)=>s-i);const up=Array.from({length:max-s+1},(_,i)=>s+i);return direction==='back'?[...up,...Array.from({length:max-min},(_,i)=>max-i-1)]:up;}
@@ -132,5 +154,5 @@ function articulation(e,i,duration,rhythm='original'){
  if(final)gate=.92;
  return {duration:duration*gate,release:Math.min(.16,duration*(repeated||boundary?.14:.32)),velocity:gate>=.98?.44:.5};
 }
-const api={trainingBanks,exercises,offsets,bounds,route,note,articulation};root.Vocal=api;if(typeof module!=='undefined')module.exports=api;
+const api={rangePresets,rangeGroup,rangeLimit,presetRange,storedRange,trainingBanks,exercises,offsets,bounds,route,note,articulation};root.Vocal=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);

@@ -6,7 +6,9 @@ A minimal piano-backed vocal practice app with 106 original exercises, a dark th
 
 General Warmups includes 6 Fundamentals and 10 each of Blues, R&B, Jazz, Pop and Agility. Chest Voice, Mix, Head Voice & Falsetto, Belting, and Breath & Sustain each add 10 exercises with short guidance.
 
-Select an exercise and range, then press Play. Exercises move chromatically through the range. Baritone starts at G2–C5 and Tenor at C3–E5. Both allow custom limits. These are app presets, not an assessment of your voice.
+Select an exercise and range, then press Play. Exercises move chromatically through the range. General Warmups uses G2–C5 for Baritone and C3–E5 for Tenor. Training sections use focus-specific presets, with separate remembered adjustments by voice type. Belting adjustments stop at C5. These are app presets, not an assessment of your voice.
+
+Volume defaults to 100%, with a maximum of 250%. Existing deliberate volume choices are retained. Six Breath & Sustain exercises use seconds or four-beat bars with optional clicks, three rounds and recovery phases, without piano or key changes.
 
 Controls include live tempo, metronome, direction, repeats, hold key, sing together or listen-and-echo, breathing gap, and volume. A sustained chord introduces each key. Piano keys also respond to A W S E D F T G Y H U J K. Preferences stay in browser-local storage. No account, microphone, recordings, analytics, or backend is required.
 
