@@ -1,10 +1,10 @@
 # Vocal Exercises
 
-A minimal piano-backed vocal practice app with 155 exercises, a dark theme, and responsive phone, tablet, and desktop layouts.
+A minimal piano-backed vocal practice app with 163 exercises, a dark theme, and responsive phone, tablet, and desktop layouts.
 
 ## Practice
 
-General Warmups includes 8 Fundamentals, 13 Intervals, 10 Agility exercises, 39 Pentatonic Runs, 10 Major Scale Runs, and 4 Other Scales. Genre banks follow: 5 Blues, 1 R&B, 10 Jazz, 2 Pop, and 3 Rock Runs. Pentatonic-based genre patterns are grouped in Pentatonic Runs with their genre in the exercise name. Chest Voice, Mix, Head Voice & Falsetto, Belting, and Breath & Sustain each add 10 exercises with short guidance.
+General Warmups has six technique-based banks: Fundamentals, Intervals, Agility, Pentatonic Runs, Major Scale Runs, and Other Scales. Former genre studies retain their notes and rhythms and are organized by pitch content. Agility includes longer patterns and eight short ornaments, turns, trills, and grace-note approaches. Chest Voice, Mix, Head Voice & Falsetto, Belting, and Breath & Sustain each add 10 exercises with short guidance.
 
 Select an exercise and range, then press Play. Exercises move chromatically through the range. General Warmups uses G2–C5 for Baritone and C3–E5 for Tenor. Training sections use focus-specific presets, with separate remembered adjustments by voice type. Belting adjustments stop at C5. These are app presets, not an assessment of your voice.
 

@@ -170,17 +170,31 @@ make("breath8","breath","Gentle swell",[1],"Sustain “oo,” growing slightly l
 make("breath9","breath","Sustained descent",[5, 3, 2, 1],"Sing “voo” with connected notes. Let the phrase end naturally before your breath feels depleted.",[2, 2, 2, 4]),
 make("breath10","breath","Even phrase",[1, 2, 3, 5, 3, 2, 1],"Use a smooth “oo” across the phrase. Take a quiet breath before the next chord, or pause when needed.",[1, 1, 1, 2, 1, 1, 3])
 ];
-// Gather purely pentatonic genre studies into the dedicated bank.
-// Four or more distinct pitch classes distinguish runs from a basic triad.
-const pentatonicOrigins={blues:'Blues',rnb:'R&B',pop:'Pop',rock:'Rock'};
+// Preserve every original study while organizing by its actual pitch content.
+const genreBanks=['blues','rnb','jazz','pop','rock'];
 for(const e of exercises){
- if(!pentatonicOrigins[e.bank])continue;
- const pcs=[...new Set(offsets(e).map(n=>n%12))],allowed=e.scale==='minor'?[0,3,5,7,10]:[0,2,4,7,9];
- if(pcs.length>=4&&pcs.every(n=>allowed.includes(n))){
-  e.name=pentatonicOrigins[e.bank]+' · '+e.name;e.bank='pentatonic';
-  if(!e.hint)e.hint='Follow the pentatonic notes with a connected, comfortable tone.';
- }
+ if(!genreBanks.includes(e.bank))continue;
+ const pcs=[...new Set(offsets(e).map(n=>((n%12)+12)%12))];
+ const pent=e.scale==='minor'?[0,3,5,7,10]:[0,2,4,7,9];
+ e.bank=pcs.every(n=>pent.includes(n))?'pentatonic':pcs.every(n=>major.includes(n))?'major-runs':'other-scales';
+ if(!e.hint)e.hint='Sing one comfortable vowel across the phrase. Follow the rhythm and keep each pitch clear.';
 }
+// Original short ornaments, using generic neighbor-note and turn patterns.
+const ornaments=[
+ ['Upper-neighbor turn',[3,4,3,2,3],[1,.5,.5,.5,2]],
+ ['Lower-neighbor turn',[3,2,3,4,3],[1,.5,.5,.5,2]],
+ ['Two-note trill',[3,4,3,4,3,4,3,4,3],[.5,.5,.5,.5,.5,.5,.5,.5,2]],
+ ['Three-note ornament',[3,4,3],[1,.5,2]],
+ ['Lower grace-note approach',[2,3,5,3,1],[.25,.75,1,1,2]],
+ ['Upper grace-note approach',[4,3,2,1],[.25,.75,1,2]],
+ ['Phrase-ending turn',[5,4,3,4,3,2,1],[1,.5,.5,.5,.5,1,2]],
+ ['Melismatic wave',[1,2,3,4,5,4,3,2,3,4,3,2,1],[.5,.5,.5,.5,.5,.5,.5,.5,.5,.5,.5,.5,2]]
+];
+ornaments.forEach(([name,degrees,rhythm],i)=>exercises.push(make('orn'+(i+1),'agility',name,degrees,'Use one easy vowel. Start slowly, keep the small notes clear, and let the final note settle.',rhythm)));
+// Put each bank's core scales before the redistributed phrase studies.
+const order=['fundamentals','intervals','agility','pentatonic','major-runs','other-scales'];
+const core=e=>/^(f|pent|maj|other|a|orn|i)\d+$/.test(e.id)?0:1;
+exercises.sort((a,b)=>(order.indexOf(a.bank)<0?99:order.indexOf(a.bank))-(order.indexOf(b.bank)<0?99:order.indexOf(b.bank))||core(a)-core(b));
 const trainingBanks={"chest": {"name": "Chest Voice", "color": "#92cefb", "icon": "blues", "tip": "Stay near an easy speaking range. Keep the sound clear, not loud."}, "mix": {"name": "Mix", "color": "#c8b1ed", "icon": "jazz", "tip": "Let the sound lighten as pitch rises. Do not force one register upward."}, "head": {"name": "Head Voice & Falsetto", "color": "#f2a5ce", "icon": "pop", "tip": "Use a light, easy upper register. Head voice and falsetto may feel different."}, "belt": {"name": "Belting", "color": "#f5bc96", "icon": "fundamentals", "tip": "Warm up first. These are moderate-volume belt foundations, not maximum-power drills."}, "breath": {"name": "Breath & Sustain", "color": "#a9dfb5", "icon": "agility", "tip": "Take an easy breath. Finish before you run out of air and breathe whenever needed."}};
 
 // Practice presets, not measurements of a singer's register. MIDI 60 is C4.
