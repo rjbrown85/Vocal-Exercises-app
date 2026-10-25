@@ -25,3 +25,21 @@
   slideIn('back');document.getElementById('general-warmups').focus({preventScroll:true});window.scrollTo(0,0);
  };
 })();
+
+// New training sections have their own destinations, ready for exercise content.
+let selectedTraining=null;
+document.querySelectorAll('[data-training]').forEach(button=>{
+ button.onclick=()=>{
+  selectedTraining=button;
+  document.getElementById('landing').hidden=true;
+  document.getElementById('training-section').hidden=false;
+  document.getElementById('training-title').textContent=button.querySelector('span').textContent;
+  document.documentElement.style.setProperty('--accent',button.style.getPropertyValue('--training-color'));
+  slideIn('forward');document.getElementById('training-title').focus({preventScroll:true});window.scrollTo(0,0);
+ };
+});
+document.getElementById('training-back').onclick=()=>{
+ document.getElementById('training-section').hidden=true;
+ document.getElementById('landing').hidden=false;
+ slideIn('back');selectedTraining?.focus({preventScroll:true});window.scrollTo(0,0);
+};
