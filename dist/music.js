@@ -1,13 +1,44 @@
 (function(root){
 const major=[0,2,4,5,7,9,11,12],minor=[0,2,3,5,7,8,10,12];
 const make=(id,bank,name,degrees,hint,rhythm=null,scale='major',tempo=120)=>({id,bank,name,degrees,hint,rhythm,scale,tempo});
+const countingGroups=[];
+for(let top=1;top<=8;top++)countingGroups.push([...Array.from({length:top},(_,i)=>i+1),...Array.from({length:top-1},(_,i)=>top-i-1)]);
+for(let bottom=8;bottom>=1;bottom--)countingGroups.push([...Array.from({length:9-bottom},(_,i)=>8-i),...Array.from({length:8-bottom},(_,i)=>bottom+i+1)]);
+const countingDegrees=countingGroups.flat(),countingEnds=[];let countingLength=0;
+for(const group of countingGroups){countingLength+=group.length;countingEnds.push(countingLength-1);}
 const exercises=[
 make('f1','fundamentals','Three-note warm-up',[1,2,3,2,1],'Small steps. Easy start.'),
 make('f2','fundamentals','Five-note scale',[1,2,3,4,5,4,3,2,1],'An even rise and return.'),
-make('f3','fundamentals','Triad arpeggio',[1,3,5,3,1],'Find the space between notes.'),
+make('f3','fundamentals','Three-tone arpeggio',[1,3,5,3,1],'Find the space between notes.'),
 make('f4','fundamentals','Octave arpeggio',[1,3,5,8,5,3,1],'An octave, one note at a time.'),
 make('f5','fundamentals','Octave scale',[1,2,3,4,5,6,7,8,7,6,5,4,3,2,1],'A full climb and return.'),
 make('f6','fundamentals','Pentatonic run',[1,2,3,5,6,8,6,5,3,2,1],'Five tones. A little more space.'),
+make('f7','fundamentals','Nine-tone scale',[1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1],'A scale to the ninth and back.'),
+make('f8','fundamentals','Octave arpeggio · repeat',[1,3,5,8,5,3,1,3,5,8,5,3,1],'Two connected octave arpeggios.'),
+Object.assign(make('f9','fundamentals','Expanding scale · up & back',countingDegrees,'Build from 1 to 8, then mirror from 8 down to 1. Breathe between groups.',countingDegrees.map((_,i)=>countingEnds.includes(i)?1:.5)),{groups:countingGroups,groupEnds:countingEnds,restAfter:Object.fromEntries(countingEnds.slice(0,-1).map(i=>[i,1]))}),
+Object.assign(make("i0","intervals","Unison",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 0, 0, 0, 0]}),
+Object.assign(make("i1","intervals","Minor second",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 1, 0, 1, 0]}),
+Object.assign(make("i2","intervals","Major second",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 2, 0, 2, 0]}),
+Object.assign(make("i3","intervals","Minor third",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 3, 0, 3, 0]}),
+Object.assign(make("i4","intervals","Major third",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 4, 0, 4, 0]}),
+Object.assign(make("i5","intervals","Perfect fourth",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 5, 0, 5, 0]}),
+Object.assign(make("i6","intervals","Tritone \u00b7 augmented fourth / diminished fifth",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 6, 0, 6, 0]}),
+Object.assign(make("i7","intervals","Perfect fifth",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 7, 0, 7, 0]}),
+Object.assign(make("i8","intervals","Minor sixth",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 8, 0, 8, 0]}),
+Object.assign(make("i9","intervals","Major sixth",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 9, 0, 9, 0]}),
+Object.assign(make("i10","intervals","Minor seventh",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 10, 0, 10, 0]}),
+Object.assign(make("i11","intervals","Major seventh",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 11, 0, 11, 0]}),
+Object.assign(make("i12","intervals","Octave",[1, 1, 1, 1, 1],"Sing \u201coo\u201d from the lower note to the upper note and back. Listen for the distance.",[1, 1, 1, 1, 2]),{semitones:[0, 12, 0, 12, 0]}),
+make("rk1","rock","Power-fifth call",[1, 5, 5, 4, 3, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[1, 0.5, 0.5, 1, 1, 2],"major"),
+make("rk2","rock","Minor pentatonic climb",[1, 3, 4, 5, 7, 5, 4, 3, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 1, 2],"minor"),
+make("rk3","rock","Repeated-note drive",[3, 3, 3, 5, 4, 3, 2, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[0.5, 0.5, 1, 0.5, 0.5, 1, 1, 2],"major"),
+make("rk4","rock","Flat-seventh fall",[8, 7, 5, 4, 3, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[1, 1, 0.5, 0.5, 1, 2],"minor"),
+make("rk5","rock","Octave refrain",[1, 5, 8, 8, 7, 5, 3, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[1, 1, 0.5, 0.5, 1, 1, 1, 2],"minor"),
+make("rk6","rock","Syncopated rise",[1, 3, 3, 4, 5, 4, 3, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[0.75, 0.25, 1, 0.5, 0.5, 1, 1, 2],"minor"),
+make("rk7","rock","Major rock turn",[3, 5, 6, 5, 3, 2, 3, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 2],"major"),
+make("rk8","rock","Minor neighbor run",[5, 4, 5, 7, 5, 4, 3, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 2],"minor"),
+make("rk9","rock","Held note and release",[5, 5, 4, 3, 2, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[2, 0.5, 0.5, 1, 1, 2],"major"),
+make("rk10","rock","Anthem descent",[8, 6, 5, 3, 5, 3, 2, 1],"Use a clear, comfortable tone. These patterns do not require rasp or distortion.",[1, 1, 1, 0.5, 0.5, 1, 1, 2],"major"),
 // Original blues studies using minor pentatonic shapes, blue notes and swing.
 make('bl1','blues','Minor Pentatonic Call',[1,3,4,5,4,3,1],'',[1,2/3,1/3,1,2/3,1/3,2],'minor',120),
 Object.assign(make('bl2','blues','Blue-Note Turn',[4,4,5,4,3,1],'',[2/3,1/3,1,2/3,1/3,2],'minor',120),{alterations:{1:1}}),
@@ -139,7 +170,7 @@ function storedRange(bank,voice,saved){
  return {low,high,preset:saved.preset};
 }
 
-function offsets(e,override='auto'){const scale=override==='auto'?e.scale:override;return e.degrees.map((d,i)=>(scale==='minor'?minor:major)[d-1]+(e.alterations?.[i]||0));}
+function offsets(e,override='auto'){const scale=override==='auto'?e.scale:override;if(e.semitones)return [...e.semitones];return e.degrees.map((d,i)=>(scale==='minor'?minor:major)[(d-1)%7]+12*Math.floor((d-1)/7)+(e.alterations?.[i]||0));}
 function bounds(e,low,high,override='auto'){const n=offsets(e,override);return {min:low-Math.min(...n),max:high-Math.max(...n)};}
 function route(min,max,direction,start){if(min>max)return [];const s=Math.max(min,Math.min(max,start??(direction==='down'?max:min)));if(direction==='down')return Array.from({length:s-min+1},(_,i)=>s-i);const up=Array.from({length:max-s+1},(_,i)=>s+i);return direction==='back'?[...up,...Array.from({length:max-min},(_,i)=>max-i-1)]:up;}
 function note(n){return ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'][((n%12)+12)%12]+(Math.floor(n/12)-1);}
@@ -147,7 +178,7 @@ function note(n){return ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B�
 const connection={a1:1.02,a2:1.02,a3:1.01,a4:1.02,a5:1.02,a6:1.02,a7:1.02,a8:1.01,a9:1.02,a10:1.01,bl1:1.01,bl2:1.02,bl3:1.02,bl4:.94,bl5:1.02,bl6:1.01,bl7:1.01,bl8:1.02,bl9:1.01,bl10:1.03,p1:.95,p2:1.02,p3:.92,p4:1.01,p5:.94,p6:1.01,p7:1.03,p8:1.01,p9:.98,p10:1.02,j1:.94,j2:.98,j3:.98,j4:.96,j5:.96,j6:.99,j7:.96,j8:1.01,j9:1.01,j10:.98,r1:1.03,r2:1.03,r3:1.02,r4:1.03,r5:1.03,r6:1.03,r7:1.03,r8:1.02,r9:1.01,r10:1.03,f1:1.02,f2:1.02,f3:.98,f4:.98,f5:1.02,f6:1.02};
 const phraseEnds={bl7:[4]};
 function articulation(e,i,duration,rhythm='original'){
- const final=i===e.degrees.length-1,repeated=!final&&offsets(e)[i]===offsets(e)[i+1],boundary=rhythm==='original'&&(phraseEnds[e.id]||[]).includes(i);
+ const final=i===e.degrees.length-1,repeated=!final&&offsets(e)[i]===offsets(e)[i+1],boundary=rhythm==='original'&&(e.groupEnds||phraseEnds[e.id]||[]).includes(i);
  let gate=connection[e.id]||.98;
  if(repeated)gate=.82;
  if(boundary)gate=.86;

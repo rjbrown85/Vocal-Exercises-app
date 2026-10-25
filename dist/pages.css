@@ -265,3 +265,15 @@ main:has(#home:not([hidden])) h1{font-size:28px;letter-spacing:-.8px}
 @media(min-width:700px) and (max-width:1000px){.is-timed .player{display:flex;flex-direction:column}.is-timed #breath-visual{flex:1}}
 @media(max-width:699px){#breath-visual{min-height:230px}.is-timed .controls{padding-top:16px}.is-timed .controls>.volume-control{margin-top:14px}}
 .is-timed #metronome{min-height:44px;padding:10px 14px;font-size:13px;border:1px solid var(--glass-line);border-radius:12px}
+
+/* Eight warmup banks, still two columns; size square cards to the viewport. */
+#home .banks [data-bank=intervals]{--bank:#9bded5}
+#home .banks [data-bank=rock]{--bank:#f2a189}
+main:has(#home:not([hidden])){max-width:min(620px,calc(50svh - 48px));padding:20px 18px}
+#home .intro,#home .bank-heading{display:none}
+#home .banks{gap:10px}
+#home .banks button,#home .banks button[data-bank=fundamentals]{font-size:16px;padding:10px;gap:8px}
+#home .banks button .bank-icon,#home .banks button[data-bank=fundamentals] .bank-icon{width:62px;height:44px;padding:9px}
+#home .banks button .bank-text small{font-size:11px}
+@media(max-height:760px){#home .banks button .bank-text small{display:none}#home .banks button,#home .banks button[data-bank=fundamentals]{font-size:14px;gap:4px;padding:6px}main:has(#home:not([hidden])) h1{font-size:20px}#home .warmups-heading h2{font-size:18px}}
+@media(max-width:360px){main:has(#home:not([hidden])){max-width:100%;padding:16px}}
