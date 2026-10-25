@@ -168,3 +168,26 @@ main.nav-anim[data-nav=back]>section:not([hidden]){animation:nav-from-left .32s 
 @keyframes nav-from-left{from{opacity:0;transform:translateX(-22px)}}
 @media(prefers-reduced-motion:reduce){main.nav-anim>header,main.nav-anim>section:not([hidden]){animation:nav-fade .15s ease-out}}
 body{overflow-x:clip}
+/* Top-level training menu and a brief logo opening over the existing clouds. */
+body:has(#landing:not([hidden])){background:#1c1b18}
+body:has(#landing:not([hidden])) .ambient{color:#8a8170;opacity:.7}
+main:has(#landing:not([hidden])){max-width:760px;min-height:100svh;height:auto;padding:60px 32px;display:flex;flex-direction:column;justify-content:center}
+main:has(#landing:not([hidden]))>header{margin-bottom:40px}
+main:has(#landing:not([hidden])) h1{font-size:38px;letter-spacing:-1.2px;gap:14px}
+main:has(#landing:not([hidden])) .brand-icon{background:transparent;color:#f5bc96;box-shadow:none}
+#landing{width:100%}
+.training-card{width:100%;display:grid;grid-template-columns:84px 1fr auto;align-items:center;gap:22px;padding:28px;text-align:left;border-radius:24px;border:1px solid #f5bc964a;background:rgba(43,39,34,.94);box-shadow:inset 0 1px 0 #ffffff15,0 16px 48px #0002;font-size:25px;font-weight:500;color:var(--ink)}
+.training-card svg{width:84px;height:68px;padding:12px;background:#f5bc961a;border-radius:16px;color:#f5bc96;stroke-width:4}
+.training-card>span:last-child{color:#c9b6a5;font-size:30px}
+.training-card:hover{background:#393129;border-color:#f5bc9680}
+.warmups-heading{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.warmups-heading button{min-height:44px;padding:10px 14px;background:var(--glass-control);border:1px solid var(--glass-line);border-radius:12px;font-size:13px}
+.warmups-heading h2{font-size:23px;font-weight:500;letter-spacing:-.4px;margin:0}
+#home .intro p:first-child{font-weight:400;color:var(--muted)}
+#splash{position:fixed;inset:0;z-index:200;display:grid;place-items:center;opacity:1;transition:opacity .5s ease;touch-action:manipulation}
+#splash svg{width:clamp(180px,62vw,320px);height:auto;aspect-ratio:4/3;color:#f5bc96;filter:drop-shadow(0 12px 40px #f5bc9620)}
+body.booting{overflow:hidden}body.booting main{opacity:0;pointer-events:none}
+main{transition:opacity .5s ease}
+#splash.leaving{opacity:0;pointer-events:none}
+@media(max-width:699px){main:has(#landing:not([hidden])){padding:36px 24px;justify-content:center}main:has(#landing:not([hidden])) h1{font-size:28px;gap:8px}main:has(#landing:not([hidden]))>header{margin-bottom:30px}.training-card{grid-template-columns:58px 1fr auto;padding:22px 18px;gap:14px;font-size:20px;border-radius:20px}.training-card svg{width:58px;height:56px;padding:8px;border-radius:12px}.warmups-heading{gap:12px}.warmups-heading h2{font-size:21px}}
+@media(prefers-reduced-motion:reduce){#splash,main{transition:none}#splash{display:none}main.nav-anim>header,main.nav-anim>section:not([hidden]){animation:none}}
