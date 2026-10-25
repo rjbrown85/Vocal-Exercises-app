@@ -35,7 +35,8 @@ class SamplePiano {
     source.addEventListener('ended',()=>{source.disconnect();gain.disconnect()},{once:true});
     source.fadeOut=()=>{
       const now=this.context.currentTime;
-      gain.gain.cancelAndHoldAtTime(now);
+      if(gain.gain.cancelAndHoldAtTime)gain.gain.cancelAndHoldAtTime(now);
+      else{gain.gain.cancelScheduledValues(now);gain.gain.setValueAtTime(gain.gain.value,now);}
       gain.gain.linearRampToValueAtTime(0,now+.025);
       source.stop(now+.03);
     };

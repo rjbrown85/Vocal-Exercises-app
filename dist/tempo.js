@@ -4,18 +4,19 @@ const tempoScrub={
  async start(){
   if(typeof isTimed==='function'&&isTimed())return;
   if(this.active)return;
+  if(typeof starting!=='undefined'&&starting)pause();
   this.active=true;const session=++this.session;Sound.hold();
   this.clock=running?phraseClock:null;
   this.position=this.clock?(ctx.currentTime-this.clock.base)/this.clock.beat:null;
   if(this.clock)cancel();
   this.guard=token;
   try{
-   await initAudio();
+   await initAudio(false);
    if(!this.active||session!==this.session)return;
    const osc=ctx.createOscillator(),gain=ctx.createGain();
    osc.type='sine';osc.frequency.value=this.frequency(s.tempo);
    gain.gain.setValueAtTime(0,ctx.currentTime);
-   gain.gain.linearRampToValueAtTime(.09*s.volume/100,ctx.currentTime+.06);
+   gain.gain.linearRampToValueAtTime(.09,ctx.currentTime+.06);
    osc.connect(gain);gain.connect(master);osc.start();
    this.osc=osc;this.gain=gain;
   }catch{this.end()}
@@ -30,7 +31,7 @@ const tempoScrub={
   this.active=false;
   if(this.osc){
    const osc=this.osc,gain=this.gain,now=ctx.currentTime;
-   gain.gain.cancelAndHoldAtTime(now);gain.gain.linearRampToValueAtTime(0,now+.08);
+   if(gain.gain.cancelAndHoldAtTime)gain.gain.cancelAndHoldAtTime(now);else{gain.gain.cancelScheduledValues(now);gain.gain.setValueAtTime(gain.gain.value,now);}gain.gain.linearRampToValueAtTime(0,now+.08);
    osc.stop(now+.09);osc.onended=()=>{osc.disconnect();gain.disconnect()};
    this.osc=null;this.gain=null;
   }
