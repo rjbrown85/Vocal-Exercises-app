@@ -284,3 +284,9 @@ main:has(#home:not([hidden])){max-width:min(620px,calc(50svh - 48px));padding:20
 .transport #hold,.transport #next-key{font-size:13px;text-transform:none;color:var(--ink);min-height:44px}
 .is-timed #next-key{display:none!important}
 .is-timed .transport{grid-template-columns:1fr}
+
+/* Technique banks first, genres below. Keep readable cards as the library grows. */
+main:has(#home:not([hidden])){max-width:620px}
+#home .banks [data-bank=pentatonic]{--bank:#e7c76c}
+#home .banks [data-bank=major-runs]{--bank:#a7c9ef}
+#home .banks [data-bank=other-scales]{--bank:#bdb0ed}

@@ -1,14 +1,14 @@
 # Vocal Exercises
 
-A minimal piano-backed vocal practice app with 132 exercises, a dark theme, and responsive phone, tablet, and desktop layouts.
+A minimal piano-backed vocal practice app with 155 exercises, a dark theme, and responsive phone, tablet, and desktop layouts.
 
 ## Practice
 
-General Warmups includes 9 Fundamentals, 13 Intervals and 10 each of Blues, R&B, Jazz, Pop, Agility and Rock Runs. Chest Voice, Mix, Head Voice & Falsetto, Belting, and Breath & Sustain each add 10 exercises with short guidance.
+General Warmups includes 8 Fundamentals, 13 Intervals, 10 Agility exercises, 39 Pentatonic Runs, 10 Major Scale Runs, and 4 Other Scales. Genre banks follow: 5 Blues, 1 R&B, 10 Jazz, 2 Pop, and 3 Rock Runs. Pentatonic-based genre patterns are grouped in Pentatonic Runs with their genre in the exercise name. Chest Voice, Mix, Head Voice & Falsetto, Belting, and Breath & Sustain each add 10 exercises with short guidance.
 
 Select an exercise and range, then press Play. Exercises move chromatically through the range. General Warmups uses G2–C5 for Baritone and C3–E5 for Tenor. Training sections use focus-specific presets, with separate remembered adjustments by voice type. Belting adjustments stop at C5. These are app presets, not an assessment of your voice.
 
-Volume defaults to 100%, with a maximum of 250%. Existing deliberate volume choices are retained. Six Breath & Sustain exercises use seconds or four-beat bars with optional cruns, three rounds and recovery phases, without piano or key changes.
+Volume defaults to 100%, with a maximum of 250%. Existing deliberate volume choices are retained. Six Breath & Sustain exercises use seconds or four-beat bars with optional clicks, three rounds and recovery phases, without piano or key changes.
 
 Controls include live tempo, metronome, direction, repeats, hold key, sing together or listen-and-echo, breathing gap, and volume. A sustained chord introduces each key. Piano keys also respond to A W S E D F T G Y H U J K. Preferences stay in browser-local storage. No account, microphone, recordings, analytics, or backend is required.
 
