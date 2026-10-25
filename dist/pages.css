@@ -236,3 +236,14 @@ main:has(#home:not([hidden])) h1{font-size:28px;letter-spacing:-.8px}
  #home .banks button .bank-text small{font-size:12px}
 }
 @media(min-width:700px) and (max-height:850px){main:has(#home:not([hidden])){max-width:400px}}
+
+/* Short training guidance, with optional technique context. */
+#training-guidance{margin:0 0 16px;color:var(--ink);font-size:14px;line-height:1.45}
+#training-guidance[hidden]{display:none}
+#exercise-guidance{margin:8px 0}
+.practice-tip{font-size:12px;color:var(--muted)}
+.practice-tip summary{padding:4px 0;cursor:pointer;width:fit-content}
+.practice-tip p{margin:8px 0;line-height:1.5}
+.practice-tip a{color:var(--accent)}
+.sound-credit{font-size:12px;line-height:1.5}
+@media(max-width:699px){#training-guidance{font-size:13px;margin-bottom:10px}.practice-heading h2{font-size:19px}.practice-heading{gap:8px}}

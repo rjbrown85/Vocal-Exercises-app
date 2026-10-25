@@ -21,6 +21,7 @@
     if (select.id === 'exercise') button.classList.add('exercise-trigger');
     button.innerHTML = '<span></span><span aria-hidden="true">⌄</span>';
     button.id = select.id + '-menu';
+    if(select.hasAttribute('aria-describedby'))button.setAttribute('aria-describedby',select.getAttribute('aria-describedby'));
     button.setAttribute('aria-haspopup', 'listbox');
     button.setAttribute('aria-expanded', 'false');
     const label = document.querySelector(`label[for="${select.id}"]`);

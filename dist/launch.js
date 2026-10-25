@@ -26,20 +26,11 @@
  };
 })();
 
-// New training sections have their own destinations, ready for exercise content.
-let selectedTraining=null;
+// Training uses the same player, with a brief instruction for each exercise.
 document.querySelectorAll('[data-training]').forEach(button=>{
  button.onclick=()=>{
-  selectedTraining=button;
-  document.getElementById('landing').hidden=true;
-  document.getElementById('training-section').hidden=false;
-  document.getElementById('training-title').textContent=button.querySelector('span').textContent;
-  document.documentElement.style.setProperty('--accent',button.style.getPropertyValue('--training-color'));
-  slideIn('forward');document.getElementById('training-title').focus({preventScroll:true});window.scrollTo(0,0);
+  const e=M.exercises.find(e=>e.bank===button.dataset.training);
+  change({bank:e.bank,id:e.id,tempo:120,start:'auto'});
+  showPractice();
  };
 });
-document.getElementById('training-back').onclick=()=>{
- document.getElementById('training-section').hidden=true;
- document.getElementById('landing').hidden=false;
- slideIn('back');selectedTraining?.focus({preventScroll:true});window.scrollTo(0,0);
-};
