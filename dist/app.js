@@ -8,7 +8,7 @@ if(s.directionVersion!==1){s.direction='back';s.directionVersion=1}
 s.metronome=Boolean(s.metronome);
 s.bank='fundamentals';s.id='f1';s.start='auto';s.tempo=120;
 if(!M.exercises.some(e=>e.id===s.id&&e.bank===s.bank))s={...defaults};
-for(const [k,min,max] of [['low',36,83],['high',37,84],['tempo',40,240],['volume',0,150],['gap',0,6],['repeats',1,4]])s[k]=Math.min(max,Math.max(min,Number(s[k])||defaults[k]));
+for(const [k,min,max] of [['low',36,83],['high',37,84],['tempo',40,240],['volume',0,250],['gap',0,6],['repeats',1,4]])s[k]=Math.min(max,Math.max(min,Number.isFinite(Number(s[k]))?Number(s[k]):defaults[k]));
 if(s.preset==='baritone')s.high=72;
 if(s.preset==='tenor')s.high=76;
 if(s.low>=s.high){s.low=43;s.high=72}
