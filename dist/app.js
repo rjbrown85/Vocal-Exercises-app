@@ -1,14 +1,14 @@
 'use strict';
 const $=id=>document.getElementById(id),M=Vocal;
-const defaults={bank:'fundamentals',id:'f1',low:43,high:72,preset:'baritone',direction:'back',tempo:80,rhythm:'original',playback:'together',scale:'auto',start:'auto',repeats:1,gap:0,volume:65,metronome:false,flowVersion:3};
+const defaults={bank:'fundamentals',id:'f1',low:43,high:72,preset:'baritone',direction:'back',tempo:120,rhythm:'original',playback:'together',scale:'auto',start:'auto',repeats:1,gap:0,volume:65,metronome:false,flowVersion:3};
 let s={...defaults};try{const saved=JSON.parse(localStorage.getItem('vocal-paper-v1')||'{}');s={...s,...saved,flowVersion:saved.flowVersion}}catch{}
 // Apply the shorter breathing default once to existing saved sessions.
 if(s.flowVersion!==3){s.gap=0;s.flowVersion=3}
 if(s.directionVersion!==1){s.direction='back';s.directionVersion=1}
 s.metronome=Boolean(s.metronome);
-s.bank='fundamentals';s.id='f1';s.start='auto';
+s.bank='fundamentals';s.id='f1';s.start='auto';s.tempo=120;
 if(!M.exercises.some(e=>e.id===s.id&&e.bank===s.bank))s={...defaults};
-for(const [k,min,max] of [['low',36,83],['high',37,84],['tempo',40,160],['volume',0,150],['gap',0,6],['repeats',1,4]])s[k]=Math.min(max,Math.max(min,Number(s[k])||defaults[k]));
+for(const [k,min,max] of [['low',36,83],['high',37,84],['tempo',40,240],['volume',0,150],['gap',0,6],['repeats',1,4]])s[k]=Math.min(max,Math.max(min,Number(s[k])||defaults[k]));
 if(s.preset==='baritone')s.high=72;
 if(s.preset==='tenor')s.high=76;
 if(s.low>=s.high){s.low=43;s.high=72}
@@ -49,7 +49,7 @@ async function play(){if(starting)return;if(running){pause();return}if(!roots.le
 function runPhrase(cue=false,anchor=null,resume=null){if(!running)return;if(pending&&!resume){pending=false;drawContour();resetRoute();$('message').textContent='';cue=true}const config=resume?.config??{...s},e=resume?.exercise??exercise(),mode=resume?.mode??(scale()==='auto'?e.scale:scale()),notes=M.offsets(e,mode).map(n=>n+rootNote),beat=60/s.tempo,durations=e.degrees.map((_,i)=>config.rhythm==='original'&&e.rhythm?e.rhythm[i]:i===e.degrees.length-1?2:1),t=token,lead=cue?beat*2:0,off=0;let at=lead+off;const base=anchor??ctx.currentTime+.06,echo=config.playback==='echo',gap=config.gap*beat;phraseClock={base,beat,cue,config,exercise:e,mode};const schedule=(seconds,fn,t)=>{const delay=base+seconds-ctx.currentTime;if(delay<=0&&resume)fn();else later(delay,fn,t)};const playNote=(n,start,duration,velocity,release)=>{const elapsed=Math.max(0,ctx.currentTime-start);if(elapsed>=duration+release)return;const releaseElapsed=Math.max(0,elapsed-duration),remaining=Math.max(0,duration-elapsed),level=velocity*Math.pow(.0001/Math.max(.001,velocity*.85),releaseElapsed/release);tone(n,Math.max(start,ctx.currentTime),remaining,level,release-releaseElapsed,elapsed)};updateKey();if(cue){$('phase').textContent='KEY CHORD';for(const interval of [0,mode==='minor'?3:4,7])playNote(rootNote+interval,base,lead+off+beat*.35,.13,.65)}schedule(at,()=>{$('phase').textContent=echo?'LISTEN':'SING'},t);
 const phraseEnd=at+durations.reduce((sum,d)=>sum+d*beat,0),transition=Math.ceil((phraseEnd-1e-8)/beat)*beat+gap;const timings=[];notes.forEach((n,i)=>{const dur=durations[i]*beat;timings.push(at);const feel=M.articulation(e,i,dur,config.rhythm);if(i===notes.length-1&&!echo){feel.duration=transition-at;feel.release=.18}playNote(n,base+at,feel.duration,feel.velocity,feel.release);schedule(at,()=>highlight(n,i),t);at+=dur;});schedule(echo?at:transition,()=>highlight(null),t);if(echo){const phraseStart=lead+off,phraseLength=at-phraseStart,echoStart=at+beat;schedule(at,()=>{$('phase').textContent='YOUR TURN IN ONE BEAT'},t);schedule(echoStart,()=>{$('phase').textContent='YOUR TURN'},t);timings.forEach((time,i)=>schedule(echoStart+time-phraseStart,()=>highlight(notes[i],i),t));at=echoStart+phraseLength;schedule(at,()=>highlight(null),t)}schedule(at,()=>{$('phase').textContent='BREATHE'},t);const total=Math.ceil((at-1e-8)/beat)*beat+gap;for(let tick=0;tick<total-1e-8;tick+=beat){if(base+tick>=ctx.currentTime)clickBeat(base+tick);}schedule(total-.08,()=>{if(pending){runPhrase(true,base+total);return}repeat++;if(!holding&&repeat>=s.repeats){repeat=0;if(pos>=roots.length-1){later(.28,finish,t);return}pos++;rootNote=roots[pos];keyboard();runPhrase(true,base+total);return}runPhrase(false,base+total)},t)}
 function setTempo(value){
- const tempo=Math.max(40,Math.min(160,Number(value)));if(!Number.isFinite(tempo))return;
+ const tempo=Math.max(40,Math.min(240,Number(value)));if(!Number.isFinite(tempo))return;
  const clock=phraseClock,now=ctx?.currentTime,position=running&&clock?(now-clock.base)/clock.beat:null;
  if(typeof tempoScrub!=='undefined'&&tempoScrub.active){tempoScrub.update(tempo);return}
  s.tempo=tempo;$('tempo').value=tempo;$('tempoValue').innerHTML=`${tempo} <small>BPM</small>`;save();

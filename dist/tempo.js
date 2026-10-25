@@ -19,7 +19,7 @@ const tempoScrub={
    this.osc=osc;this.gain=gain;
   }catch{this.end()}
  },
- frequency(tempo){return 160*2**((tempo-40)/60)},
+ frequency(tempo){return 160*2**((tempo-40)/100)},
  update(tempo){
   s.tempo=tempo;$('tempo').value=tempo;$('tempoValue').innerHTML=`${tempo} <small>BPM</small>`;save();
   if(this.osc)this.osc.frequency.setTargetAtTime(this.frequency(tempo),ctx.currentTime,.1);

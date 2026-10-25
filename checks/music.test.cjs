@@ -11,3 +11,5 @@ assert.deepEqual(M.offsets(M.exercises.find(e=>e.id==='j9')),[5,6,7,4,2,0]);
 assert.deepEqual(M.offsets(M.exercises.find(e=>e.id==='bl2')),[5,6,7,5,3,0]);
 assert.deepEqual(M.offsets(M.exercises.find(e=>e.id==='bl8')),[3,4,7,4,3,0]);
 assert(!M.exercises.some(e=>['boyd','cuomo'].includes(e.bank)));
+
+assert(M.exercises.every(e=>e.tempo===120),'Every exercise starts at 120 BPM');
