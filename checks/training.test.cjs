@@ -12,7 +12,7 @@ test('every pitched training exercise fits both category presets, including mix'
  assert.deepEqual(M.presetRange('jazz','tenor'),{low:48,high:76,preset:'tenor'});
 });
 test('six non-pitched protocols have positive phases, recovery time, and three rounds',()=>{
- const timers=M.exercises.filter(e=>e.timer);assert.equal(timers.length,6);
+ const timers=M.exercises.filter(e=>e.timer&&!e.timer.openEnded);assert.equal(timers.length,6);
  for(const e of timers){assert.equal(e.degrees.length,0);assert.equal(e.timer.cycles,3);assert(e.timer.phases.every(p=>p.length>0));assert.equal(e.timer.phases.at(-1).label,'Breathe normally');}
 });
 function harness(id){let now=0,clicks=0,finished=0,interval,clears=0,latest;
@@ -31,4 +31,9 @@ test('bar timer uses four beats per bar and live tempo preserves position',()=>{
  h.step(1);assert.equal(h.runner.position(),6);h.runner.setTempo(60);h.step(2);assert.equal(h.runner.position(),8);assert.equal(h.data.latest.bar,2);
  const before=h.data.clicks;h.step(20);assert(h.data.clicks<=before+1,'No burst of stale clicks after a delayed tick');
  assert.equal(frame(M.exercises.find(e=>e.id==='breath4').timer,60).done,true);
+});
+
+test('open sustain timer passes a minute, stops precisely and starts fresh',()=>{
+ const h=harness('breath11');h.runner.start();h.step(65.4);assert.equal(h.data.latest.elapsed,65.4);assert.equal(h.data.finished,0);
+ h.runner.pause();const stopped=h.runner.position();h.step(10);assert.equal(h.runner.position(),stopped);h.runner.reset();h.runner.start();assert.equal(h.data.latest.elapsed,0);
 });

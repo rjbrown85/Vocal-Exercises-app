@@ -191,6 +191,19 @@ const ornaments=[
  ['Melismatic wave',[1,2,3,4,5,4,3,2,3,4,3,2,1],[.5,.5,.5,.5,.5,.5,.5,.5,.5,.5,.5,.5,2]]
 ];
 ornaments.forEach(([name,degrees,rhythm],i)=>exercises.push(make('orn'+(i+1),'agility',name,degrees,'Use one easy vowel. Start slowly, keep the small notes clear, and let the final note settle.',rhythm)));
+// Smooth synth references for continuous slides and small bends.
+const slides=[
+ ['slide1','intervals','Whole-tone slide',[0,2,0]],
+ ['slide2','intervals','Minor-third slide',[0,3,0]],
+ ['slide3','intervals','Major-third slide',[0,4,0]],
+ ['slide4','intervals','Fifth slide',[0,7,0]],
+ ['bend1','agility','Semitone scoop',[0,1,1]],
+ ['bend2','agility','Semitone fall',[1,0,0]],
+ ['bend3','agility','Bend and return',[0,1,0]],
+ ['bend4','agility','Whole-tone bend',[0,2,0]]
+];
+for(const [id,bank,name,steps] of slides)exercises.push(Object.assign(make(id,bank,name,steps.map(()=>1),'Follow the smooth synth on an easy “oo.” Glide continuously, then settle on the final pitch.',[2,2,2]),{semitones:steps,glide:true,chord:[0,7],scaleLabel:'slide'}));
+exercises.push({id:'breath11',bank:'breath',name:'Comfortable sustain timer',degrees:[],rhythm:null,scale:'major',tempo:120,hint:'Take a normal breath. Press Start as you begin a gentle note, then press Stop when you finish. Breathe whenever you need to. No breath holding or time target.',warning:"Please make sure you're in a safe place where you won't get hurt, and make sure to stop as soon as you need to.",timer:{unit:'seconds',openEnded:true,cycles:1,phases:[]}});
 // Put each bank's core scales before the redistributed phrase studies.
 const order=['fundamentals','intervals','agility','pentatonic','major-runs','other-scales'];
 const core=e=>/^(f|pent|maj|other|a|orn|i)\d+$/.test(e.id)?0:1;

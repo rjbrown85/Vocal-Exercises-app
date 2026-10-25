@@ -1,6 +1,7 @@
 /* A clock-based trainer. It never plays or transposes piano notes. */
 (function(root){
 function frame(protocol,position){
+ if(protocol.openEnded)return {done:false,elapsed:position,label:"Sustain comfortably"};
  const length=protocol.phases.reduce((sum,p)=>sum+p.length,0),total=length*protocol.cycles;
  if(position>=total)return {done:true,cycle:protocol.cycles,total};
  const cycle=Math.floor(position/length)+1;let within=position%length;

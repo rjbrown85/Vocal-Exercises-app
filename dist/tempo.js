@@ -35,7 +35,7 @@ const tempoScrub={
    this.osc=null;this.gain=null;
   }
   if(this.clock&&running&&token===this.guard){
-   runPhrase(this.clock.cue,ctx.currentTime+.04-this.position*(60/s.tempo),this.clock);
+   runPhrase(false,ctx.currentTime+.1,this.clock);
   }
   if(!running)Sound.release(600);
   this.clock=null;
