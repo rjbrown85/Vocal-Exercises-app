@@ -64,3 +64,10 @@ button,select,input,summary,a{touch-action:manipulation}
  .studio-grid{grid-template-columns:190px minmax(0,1fr);gap:16px}.practice-panel{padding:20px}
  .tip{margin:10px 0 14px;min-height:0}#melody{max-height:140px}
 }
+
+/* Vocal phrasing stays visible in every study, including chords-only practice. */
+#melody .breath{fill:#e8c58a;opacity:.13}
+#melody .breath.active{opacity:.4}
+#melody .breath-mark{fill:#e8c58a;font-size:25px;font-weight:bold}
+.breath-cue{font-size:14px;line-height:1.5;color:#e8c58a;border-left:3px solid #e8c58a;padding:8px 12px;background:#e8c58a09;border-radius:4px;min-height:38px}
+.source-note{font-size:11px;line-height:1.5;color:var(--muted);margin:-8px 0 16px}

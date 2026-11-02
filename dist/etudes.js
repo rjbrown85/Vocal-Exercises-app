@@ -10,9 +10,9 @@
     settings.metronome=saved.metronome===true;
   } catch{}
   let progression=M.progressions[0],style=M.styles[0],arrangement,phaseStart=4,totalBeats=0;
-  let melodyEnds=0,lastRound=1,lastPass='play';
+  let melodyEnds=0,breathEnds=0,lastRound=1,lastPass='play';
   function save(){try{localStorage.setItem('vocal-etudes-settings',JSON.stringify(settings));}catch{}}
-  function clearHighlights(){document.querySelectorAll('.active').forEach(el=>el.classList.remove('active'));$('note-label').textContent='Ready';$('beat-indicator').textContent='';}
+  function clearHighlights(){document.querySelectorAll('.active').forEach(el=>el.classList.remove('active'));$('note-label').textContent='Ready';$('beat-indicator').textContent='';breathEnds=0;$('breath-cue').textContent='Breathe on the last beat of each bar. The piano keeps the pulse.';}
   const player=new EtudePlayer({
     sound:Sound,
     createAudio(){
@@ -45,7 +45,15 @@
       }
       if(event.type==='melody'){
         document.querySelectorAll('#melody .note').forEach(el=>el.classList.toggle('active',Number(el.dataset.beat)===event.beat-phaseStart));
-        $('note-label').textContent=M.noteName(event.midi,settings.key);melodyEnds=event.beat+event.duration;
+        breathEnds=0;$('breath-cue').textContent='Sing gently · the next breath is marked on the chart.';
+        document.querySelectorAll('#melody .breath').forEach(el=>el.classList.remove('active'));
+        $('note-label').textContent=M.melodyNoteName(event,settings.key);melodyEnds=event.beat+event.duration;
+      }
+      if(event.type==='breath'){
+        breathEnds=event.beat+event.duration;$('note-label').textContent='Breathe';
+        $('breath-cue').textContent='Breathe now · release the phrase and take an easy breath.';
+        document.querySelectorAll('#melody .note').forEach(el=>el.classList.remove('active'));
+        document.querySelectorAll('#melody .breath').forEach(el=>el.classList.toggle('active',Number(el.dataset.bar)===event.bar));
       }
       if(event.type==='beat')$('beat-indicator').textContent=`Beat ${event.number} / 4`;
       if(event.type==='count'){
@@ -57,7 +65,7 @@
       }
       if(event.type==='clock'){
         $('session-progress').value=Math.min(1,event.beat/totalBeats);
-        if(event.beat>=melodyEnds){document.querySelectorAll('#melody .note.active').forEach(el=>el.classList.remove('active'));$('note-label').textContent='Rest';}
+        if(event.beat>=melodyEnds){document.querySelectorAll('#melody .note.active').forEach(el=>el.classList.remove('active'));$('note-label').textContent=event.beat<breathEnds?'Breathe':'Rest';}
       }
     }
   });
@@ -81,25 +89,31 @@
       svg+=`<line class="grid" x1="${x}" x2="${x}" y1="16" y2="145"/><text x="${x+5}" y="159">${bar+1}</text>`;
     }
     for(let degree=0;degree<=7;degree++){
-      const midi=12*(settings.register+1)+settings.key+M.semitone(degree);
+      const midi=12*(settings.register+1)+settings.key+M.semitone(degree,progression.mode==='minor'?M.minorScale:M.scale);
       svg+=`<line class="grid" x1="24" x2="624" y1="${y(midi)}" y2="${y(midi)}"/>`;
     }
+    arrangement.breaths.forEach(b=>{
+      const x=left+b.beat/16*width,w=b.duration/16*width;
+      svg+=`<rect class="breath" data-bar="${b.bar}" x="${x}" y="16" width="${w}" height="129"><title>Breathe: ${b.duration} beat${b.duration===1?'':'s'} at the end of bar ${b.bar+1}</title></rect><text class="breath-mark" x="${x+w/2}" y="30" text-anchor="middle">’</text>`;
+    });
     arrangement.melody.forEach(n=>{
       const x=left+n.beat/16*width,w=Math.max(4,n.duration/16*width-3);
-      svg+=`<rect class="note" data-beat="${n.beat}" x="${x}" y="${y(n.midi)-4}" width="${w}" height="8" rx="4"><title>${M.noteName(n.midi,settings.key)}, ${n.duration} beats</title></rect>`;
+      svg+=`<rect class="note" data-beat="${n.beat}" x="${x}" y="${y(n.midi)-4}" width="${w}" height="8" rx="4"><title>${M.melodyNoteName(n,settings.key)}, ${n.duration} beats</title></rect>`;
     });
     $('melody').innerHTML=svg;
-    $('melody').setAttribute('aria-label',`${style.name}: four bars, ${M.noteName(arrangement.low,settings.key)} to ${M.noteName(arrangement.high,settings.key)}. Wider marks mean longer notes.`);
+    $('melody').setAttribute('aria-label',`${style.name}: four bars, ${M.melodyNoteName(arrangement.melody.find(n=>n.midi===arrangement.low),settings.key)} to ${M.melodyNoteName(arrangement.melody.find(n=>n.midi===arrangement.high),settings.key)}. Wider marks mean longer notes. Shaded spaces mark a breath at the end of every bar.`);
   }
   function renderStudy(){
     arrangement=M.arrange(progression,style,settings.key,settings.register);
     $('study-title').textContent=style.name;$('study-style').textContent=style.feel;
     $('study-tip').textContent=style.tip;$('study-number').textContent=`${M.styles.indexOf(style)+1} / 10`;
     $('study-select').value=style.id;
-    $('range-label').textContent=`${M.names[settings.key]} major · melody ${M.noteName(arrangement.low,settings.key)}–${M.noteName(arrangement.high,settings.key)}`;
+    $('range-label').textContent=`${M.names[settings.key]} ${progression.mode} · melody ${M.melodyNoteName(arrangement.melody.find(n=>n.midi===arrangement.low),settings.key)}–${M.melodyNoteName(arrangement.melody.find(n=>n.midi===arrangement.high),settings.key)}`;
     $('chord-strip').innerHTML=arrangement.chords.map(c=>`<div class="chord"><small>${c.roman}</small><strong>${c.name}</strong></div>`).join('');
     document.querySelectorAll('[data-study]').forEach(button=>button.setAttribute('aria-current',String(button.dataset.study===style.id)));
     $('next-study').textContent=M.styles.indexOf(style)===9?'First etude ↻':'Next etude →';
+    $('key').innerHTML=M.names.map((n,i)=>`<option value="${i}">${n} ${progression.mode}</option>`).join('');
+    $('study-source').hidden=!progression.source.startsWith('bennett');
     drawMelody();renderControls();clearHighlights();
   }
   function chooseStudy(next,{focus=false}={}){
@@ -116,7 +130,7 @@
     } else $('page-title').focus({preventScroll:true});
     window.scrollTo(0,0);
   }
-  $('progression-grid').innerHTML=M.progressions.map((p,i)=>`<button class="progression-card" data-progression="${p.id}" type="button"><span class="number">${String(i+1).padStart(2,'0')} · ${p.name}</span><span class="roman">${p.label}</span><span class="example">${p.degrees.map(d=>M.chordName(d)).join(' · ')}</span><span class="name">10 etudes</span><span class="arrow" aria-hidden="true">↗</span></button>`).join('');
+  $('progression-grid').innerHTML=M.progressions.map((p,i)=>`<button class="progression-card" data-progression="${p.id}" type="button"><span class="number">${String(i+1).padStart(2,'0')} · ${p.name}</span><span class="roman">${p.label}</span><span class="example">${p.chords.map(c=>M.progressionChordName(c)).join(' · ')}</span><span class="name">10 vocal etudes${p.source.startsWith('bennett')?' · Bennett reference':''}</span><span class="arrow" aria-hidden="true">↗</span></button>`).join('');
   document.querySelectorAll('[data-progression]').forEach(button=>button.onclick=()=>{location.hash=button.dataset.progression;});
   $('study-list').innerHTML=M.styles.map((s,i)=>`<button type="button" data-study="${s.id}" aria-current="false"><span class="study-index">${String(i+1).padStart(2,'0')}</span><b>${s.name}</b><small>${s.feel}</small></button>`).join('');
   $('study-select').innerHTML=M.styles.map((s,i)=>`<option value="${s.id}">${i+1}. ${s.name} · ${s.feel}</option>`).join('');
