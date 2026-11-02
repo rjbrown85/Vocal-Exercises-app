@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1c1b18"><meta name="description" content="Original pop-style vocal etudes over ten common four-chord progressions.">
+  <title>Vocal Etudes · Vocal Exercises</title>
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="etudes.css?v=1">
+</head>
+<body>
+<main>
+  <header class="masthead"><a href="index.html" class="brand">♫ <span>Vocal Exercises</span></a><span class="edition">MELODY PRACTICE</span></header>
+  <section id="progressions" aria-labelledby="page-title">
+    <a class="back" href="index.html">← Home</a>
+    <div class="intro"><p class="eyebrow">FOUR CHORDS. A PHRASE TO SING.</p><h1 id="page-title" tabindex="-1">Vocal Etudes</h1><p>Choose a progression. Explore ten short melodies with different rhythms, shapes, and spaces to breathe.</p></div>
+    <div class="catalog-meta"><span>10 progressions</span><span>10 etudes each · 4 bars · 4/4</span></div>
+    <div id="progression-grid" class="progression-grid"></div>
+    <p class="footnote">Examples are shown in C major. Lowercase numerals mean minor chords. Some progressions are rotations of the same four chords.</p>
+  </section>
+  <section id="studio" hidden aria-labelledby="progression-title">
+    <button id="back-progressions" class="back" type="button">← All progressions</button>
+    <div class="studio-heading"><div><p id="progression-name" class="eyebrow"></p><h1 id="progression-title" tabindex="-1"></h1></div><p id="progression-description"></p></div>
+    <div class="studio-grid">
+      <nav aria-label="Choose an etude" class="study-nav"><h2>Ten ways to sing it</h2><div id="study-list"></div></nav>
+      <section class="practice-panel" aria-labelledby="study-title">
+        <div class="study-heading"><div><p id="study-style" class="eyebrow"></p><h2 id="study-title" tabindex="-1"></h2></div><span id="study-number"></span></div>
+        <p id="study-tip" class="tip"></p>
+        <div id="chord-strip" class="chord-strip" aria-label="Four-bar chord progression"></div>
+        <div class="melody-heading"><span id="range-label"></span><span id="note-label">Ready</span></div>
+        <svg id="melody" viewBox="0 0 640 168" role="img" aria-label="Melody pitch and rhythm. Wider marks mean longer notes."></svg>
+        <p class="chart-caption">Higher marks = higher notes. Wider marks = longer notes. Empty space = a rest.</p>
+        <div class="playback-status"><p id="status" role="status" aria-live="polite">Ready to sing</p><span id="beat-indicator" aria-label="Beat"></span></div>
+        <progress id="session-progress" max="1" value="0" aria-label="Practice progress"></progress>
+        <div class="transport"><button id="play" class="primary" type="button">▶ Play etude</button><button id="next-study" type="button">Next etude →</button></div>
+        <p id="error" role="alert" hidden></p>
+        <div class="settings">
+          <label>Key<select id="key"></select></label>
+          <label>Register<select id="register"><option value="2">Lower · octave 2</option><option value="3" selected>Middle · octave 3</option><option value="4">Higher · octave 4</option></select></label>
+          <label>Practice mode<select id="mode"><option value="together">Melody + chords</option><option value="echo">Listen, then sing</option><option value="backing">Chords only</option></select></label>
+          <label>Accompaniment<select id="accompaniment"><option value="held">Held chords</option><option value="broken">Broken chords</option><option value="pulse">Pop pulse</option></select></label>
+          <label>Repeats<select id="repeats"><option value="1">1 round</option><option value="2" selected>2 rounds</option><option value="3">3 rounds</option><option value="4">4 rounds</option></select></label>
+          <label>Breathing space<select id="gap"><option value="4">4 beats between passes</option><option value="2">2 beats between passes</option><option value="0">Continuous</option></select></label>
+          <label class="slider-label" for="tempo">Tempo <output id="tempo-value">76 BPM</output><input id="tempo" type="range" min="50" max="150" value="76" step="1"></label>
+          <label class="slider-label" for="volume">Volume <output id="volume-value">80%</output><input id="volume" type="range" min="0" max="150" value="80" step="5"></label>
+        </div>
+        <label class="check"><input type="checkbox" id="metronome"> Keep the beat during the melody</label>
+        <p class="practice-note">Start with the melody, then try chords only. Sing on a comfortable syllable and choose a key and register that fit your voice. A four-beat count-in starts each session. Tempo and musical setting changes restart from the count-in.</p>
+      </section>
+    </div>
+  </section>
+  <footer><details><summary>About the music &amp; references</summary><p>These are original practice motifs built from chord tones, nearby scale notes, and simple rhythms. No song melodies, lyrics, or recordings were used. Short musical patterns can still resemble existing music by coincidence.</p><p>Progressions 1–7 follow common schemas and rotations described in <a href="https://human.libretexts.org/Bookshelves/Music/Music_Theory/Open_Music_Theory_2e_(Gotham_et_al.)/07%3A_Popular_Music/7.09%3A_Four-Chord_Schemas" target="_blank" rel="noopener">Open Music Theory</a>. Progressions 8–9 appear in the <a href="https://williswonderland.org/wp-content/uploads/2024/07/HandoutbookOfficial.pdf" target="_blank" rel="noopener">Willis Wonderland songwriting handouts</a> (Common Chord Progressions). Progression 10 is demonstrated in <a href="https://www.youtube.com/watch?v=NB6w185ADgg" target="_blank" rel="noopener">Jonny Kaine’s I–IV–vi–V lesson</a>. These references informed the harmony only.</p><p><a href="credits.html">Piano samples: Alexander Holm · CC BY 3.0</a></p></details></footer>
+</main>
+<script src="session.js?v=2"></script><script src="piano.js?v=reliable-1"></script><script src="etudes-music.js?v=1"></script><script src="etudes-player.js?v=1"></script><script src="etudes.js?v=1"></script>
+</body></html>

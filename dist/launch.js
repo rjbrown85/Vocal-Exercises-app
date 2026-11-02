@@ -32,3 +32,6 @@ document.querySelectorAll('[data-training]').forEach(button=>{
   selectBank(button.dataset.training);
  };
 });
+
+// Original melodies over four-chord accompaniment.
+document.getElementById('vocal-etudes').onclick=()=>{window.location.href='etudes.html'};

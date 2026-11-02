@@ -14,6 +14,16 @@ Controls include live tempo, metronome, direction, repeats, hold key, sing toget
 
 The training studies use common vocal tasks with original note arrangements and instructions. They are not song transcriptions or branded routines. Belting focuses on moderate-volume foundations. Choose a comfortable range for each task. See [practice notes and references](dist/practice-notes.html).
 
+## Vocal Etudes
+
+The home screen includes **Vocal Etudes**, a separate piano-backed practice space with 10 four-bar progressions and 10 original studies per progression (100 arrangements). The first three are I–V–vi–IV, vi–IV–I–V, and I–vi–IV–V. Seven additional pop progressions include common rotations, a ii-chord turnaround, and a folk-pop loop.
+
+Each study uses chord-tone targets, nearby major-scale notes, simple rhythmic variations, and rests. Melody spans stay within an octave, with no adjacent jump larger than a fourth. The ten styles range from long ballad phrases to syncopated entries and short eighth-note runs. No song transcription, lyrics, or artist imitation is used. These short musical building blocks can still resemble existing music by coincidence.
+
+Controls include all 12 major keys, three octave registers, 50–150 BPM, 1–4 rounds, breathing gaps, a metronome, and held, broken, or pulsed piano accompaniment. Practice with melody and chords, listen then sing over the same backing, or choose chords only. The displayed range describes the melody, not the accompaniment. Key and tempo changes restart with a four-beat count-in. Leaving the tab stops playback. Preferences use a separate local-storage key and do not change existing warmup settings.
+
+Open `etudes.html` through the home button. Harmony references are linked in its **About the music & references** section. See [implementation and validation notes](notes/vocal-etudes.md).
+
 ## Run locally
 
 ```sh

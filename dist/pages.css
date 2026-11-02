@@ -290,3 +290,8 @@ main:has(#home:not([hidden])){max-width:620px}
 #home .banks [data-bank=pentatonic]{--bank:#e7c76c}
 #home .banks [data-bank=major-runs]{--bank:#a7c9ef}
 #home .banks [data-bank=other-scales]{--bank:#bdb0ed}
+
+/* Etudes get a full-width entrance beneath the existing six practice tiles. */
+#landing .etudes-card{grid-column:1 / -1;aspect-ratio:auto;min-height:100px;flex-direction:row;gap:22px}
+#landing .etudes-card svg{width:70px;height:52px}
+@media(max-width:699px){#landing .etudes-card{min-height:88px;font-size:20px;gap:18px}}
