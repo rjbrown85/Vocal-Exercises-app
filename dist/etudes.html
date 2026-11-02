@@ -5,7 +5,8 @@
   <meta name="theme-color" content="#1c1b18"><meta name="description" content="Original pop-style vocal etudes over ten common four-chord progressions.">
   <title>Vocal Etudes · Vocal Exercises</title>
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="etudes.css?v=1">
+  <link rel="manifest" href="manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="etudes.css?v=ipad-2">
 </head>
 <body>
 <main>
@@ -21,6 +22,7 @@
     <button id="back-progressions" class="back" type="button">← All progressions</button>
     <div class="studio-heading"><div><p id="progression-name" class="eyebrow"></p><h1 id="progression-title" tabindex="-1"></h1></div><p id="progression-description"></p></div>
     <div class="studio-grid">
+      <div class="study-picker"><label for="study-select">Choose an etude</label><select id="study-select"></select></div>
       <nav aria-label="Choose an etude" class="study-nav"><h2>Ten ways to sing it</h2><div id="study-list"></div></nav>
       <section class="practice-panel" aria-labelledby="study-title">
         <div class="study-heading"><div><p id="study-style" class="eyebrow"></p><h2 id="study-title" tabindex="-1"></h2></div><span id="study-number"></span></div>
@@ -33,6 +35,7 @@
         <progress id="session-progress" max="1" value="0" aria-label="Practice progress"></progress>
         <div class="transport"><button id="play" class="primary" type="button">▶ Play etude</button><button id="next-study" type="button">Next etude →</button></div>
         <p id="error" role="alert" hidden></p>
+        <details class="sound-help"><summary>No sound?</summary><p>Check your iPad volume and whether sound is going to headphones or another speaker. If playback stays silent, reset the sound below.</p><button id="reset-sound" type="button">Reset sound and play</button></details>
         <div class="settings">
           <label>Key<select id="key"></select></label>
           <label>Register<select id="register"><option value="2">Lower · octave 2</option><option value="3" selected>Middle · octave 3</option><option value="4">Higher · octave 4</option></select></label>
@@ -50,5 +53,5 @@
   </section>
   <footer><details><summary>About the music &amp; references</summary><p>These are original practice motifs built from chord tones, nearby scale notes, and simple rhythms. No song melodies, lyrics, or recordings were used. Short musical patterns can still resemble existing music by coincidence.</p><p>Progressions 1–7 follow common schemas and rotations described in <a href="https://human.libretexts.org/Bookshelves/Music/Music_Theory/Open_Music_Theory_2e_(Gotham_et_al.)/07%3A_Popular_Music/7.09%3A_Four-Chord_Schemas" target="_blank" rel="noopener">Open Music Theory</a>. Progressions 8–9 appear in the <a href="https://williswonderland.org/wp-content/uploads/2024/07/HandoutbookOfficial.pdf" target="_blank" rel="noopener">Willis Wonderland songwriting handouts</a> (Common Chord Progressions). Progression 10 is demonstrated in <a href="https://www.youtube.com/watch?v=NB6w185ADgg" target="_blank" rel="noopener">Jonny Kaine’s I–IV–vi–V lesson</a>. These references informed the harmony only.</p><p><a href="credits.html">Piano samples: Alexander Holm · CC BY 3.0</a></p></details></footer>
 </main>
-<script src="session.js?v=2"></script><script src="piano.js?v=reliable-1"></script><script src="etudes-music.js?v=1"></script><script src="etudes-player.js?v=1"></script><script src="etudes.js?v=1"></script>
+<script src="session.js?v=ipad-2"></script><script src="piano.js?v=reliable-1"></script><script src="etudes-music.js?v=1"></script><script src="etudes-player.js?v=ipad-2"></script><script src="etudes.js?v=ipad-2"></script>
 </body></html>

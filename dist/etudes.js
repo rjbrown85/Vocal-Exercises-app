@@ -25,6 +25,9 @@
       $('play').textContent=state==='loading'?'■ Cancel loading':state==='playing'?'■ Stop':'▶ Play etude';
       if(state==='loading')$('status').textContent='Loading piano…';
       if(state==='playing')$('status').textContent='Count in';
+      if(state==='interrupted'){
+        clearHighlights();$('status').textContent='Audio paused · tap Play to restart';$('session-progress').value=0;
+      }
       if(state==='idle'||state==='error'||state==='complete'){
         clearHighlights();$('status').textContent=state==='complete'?'Practice complete':state==='error'?'Audio unavailable':'Ready to sing';
         $('session-progress').value=state==='complete'?1:0;
@@ -92,6 +95,7 @@
     arrangement=M.arrange(progression,style,settings.key,settings.register);
     $('study-title').textContent=style.name;$('study-style').textContent=style.feel;
     $('study-tip').textContent=style.tip;$('study-number').textContent=`${M.styles.indexOf(style)+1} / 10`;
+    $('study-select').value=style.id;
     $('range-label').textContent=`${M.names[settings.key]} major · melody ${M.noteName(arrangement.low,settings.key)}–${M.noteName(arrangement.high,settings.key)}`;
     $('chord-strip').innerHTML=arrangement.chords.map(c=>`<div class="chord"><small>${c.roman}</small><strong>${c.name}</strong></div>`).join('');
     document.querySelectorAll('[data-study]').forEach(button=>button.setAttribute('aria-current',String(button.dataset.study===style.id)));
@@ -115,11 +119,14 @@
   $('progression-grid').innerHTML=M.progressions.map((p,i)=>`<button class="progression-card" data-progression="${p.id}" type="button"><span class="number">${String(i+1).padStart(2,'0')} · ${p.name}</span><span class="roman">${p.label}</span><span class="example">${p.degrees.map(d=>M.chordName(d)).join(' · ')}</span><span class="name">10 etudes</span><span class="arrow" aria-hidden="true">↗</span></button>`).join('');
   document.querySelectorAll('[data-progression]').forEach(button=>button.onclick=()=>{location.hash=button.dataset.progression;});
   $('study-list').innerHTML=M.styles.map((s,i)=>`<button type="button" data-study="${s.id}" aria-current="false"><span class="study-index">${String(i+1).padStart(2,'0')}</span><b>${s.name}</b><small>${s.feel}</small></button>`).join('');
+  $('study-select').innerHTML=M.styles.map((s,i)=>`<option value="${s.id}">${i+1}. ${s.name} · ${s.feel}</option>`).join('');
+  $('study-select').onchange=()=>chooseStudy(M.styles.find(s=>s.id===$('study-select').value));
   document.querySelectorAll('[data-study]').forEach(button=>button.onclick=()=>chooseStudy(M.styles.find(s=>s.id===button.dataset.study)));
   $('key').innerHTML=M.names.map((n,i)=>`<option value="${i}">${n} major</option>`).join('');
   $('back-progressions').onclick=()=>{location.hash='';};
   $('next-study').onclick=()=>chooseStudy(M.styles[(M.styles.indexOf(style)+1)%M.styles.length],{focus:true});
   $('play').onclick=()=>{if(player.state==='idle')start();else player.stop();};
+  $('reset-sound').onclick=()=>{player.resetAudio=true;start();};
   const numeric=['key','register','tempo','volume','repeats','gap'];
   ['key','register','mode','accompaniment','repeats','gap','tempo'].forEach(id=>{
     $(id).addEventListener('change',()=>{

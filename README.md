@@ -24,6 +24,8 @@ Controls include all 12 major keys, three octave registers, 50–150 BPM, 1–4 
 
 Open `etudes.html` through the home button. Harmony references are linked in its **About the music & references** section. See [implementation and validation notes](notes/vocal-etudes.md).
 
+On iPad, tap Play to start audio. Interrupted or stalled audio returns to a restart prompt. **No sound? → Reset sound and play** creates a fresh audio session if playback remains silent. Tablet layouts use larger touch controls, with a compact etude selector in portrait and narrow windows.
+
 ## Run locally
 
 ```sh

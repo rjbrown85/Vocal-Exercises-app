@@ -26,3 +26,13 @@ References were used only to select harmonic formulas. Melody templates and inst
 `node --test checks/*.test.cjs` includes the existing warmup/audio checks and new etude checks. New coverage verifies the 100-study inventory, bar lengths and rests, chord-tone endings, melody span and leaps, transposition across 12 keys and 3 registers, triad quality and voicing, exact echo/gap timing, guide muting, audio-load races and retry, complete source cancellation, and three accompaniment patterns.
 
 Browser verification uses the ChatGPT in-app browser for home navigation, study selection, piano startup and completion, transposed chord/range labels, echo mode, tempo changes, and phone/desktop layout. Browser playback and clock synchronization are checked, but automated pitch/rhythm checks do not substitute for the user's listening judgment.
+
+## iPad audio follow-up
+
+Audio startup calls `resume()` directly within the Play gesture and times out after four seconds if Safari never resolves it. An interrupted context or frozen audio clock stops the session and offers a restart. The next tap creates a fresh context, reusing decoded piano samples. A manual sound-reset control provides the same recovery when the browser reports playback but the user hears silence. Scheduling looks 400 ms ahead to tolerate brief interface stalls.
+
+The shared audio-session helper reapplies playback mode on each new Play gesture and falls back to the existing silent media element if the Audio Session API setter fails. This helper also serves the original warmups.
+
+All 34 checks pass, including simulated interruptions, stuck resume promises, cancellation during startup, frozen clocks, context replacement, and the iPad desktop-user-agent fallback. Browser checks cover 768×1024 portrait, 1024×768 landscape, and 390×844 narrow layouts, plus the reset control. Physical iPad audio output has not been verified.
+
+Safari behavior references: [WebKit interruption test](https://github.com/WebKit/WebKit/blob/main/LayoutTests/webaudio/audiocontext-state-interrupted.html), [interrupted-context report](https://bugs.webkit.org/show_bug.cgi?id=273511), and [frozen audio-clock report](https://bugs.webkit.org/show_bug.cgi?id=263627). These describe failure modes, not confirmation of the cause on the user's device.

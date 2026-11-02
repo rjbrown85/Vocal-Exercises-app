@@ -10,3 +10,57 @@ a{color:var(--accent)}button,input,select{font:inherit}button,select{cursor:poin
 @media(prefers-reduced-motion:no-preference){button,a{transition:background .16s,border-color .16s}}
 
 .progression-card>span:not(.arrow){grid-column:1}
+
+/* Tablet practice keeps the melody full-width, with a compact native chooser. */
+.study-picker{display:none}
+button,select,input,summary,a{touch-action:manipulation}
+@media(max-width:1000px){
+ main{padding:20px max(20px,env(safe-area-inset-left)) max(32px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-right))}
+ .masthead{padding-bottom:16px;margin-bottom:12px}
+ .studio-heading{margin:10px 0 20px}
+ .studio-grid{grid-template-columns:minmax(0,1fr);gap:16px}
+ .study-nav{display:none}
+ .study-picker{display:flex;align-items:center;gap:16px;min-width:0}
+ .study-picker label{flex-shrink:0;font-size:14px;color:var(--muted)}
+ .study-picker select{flex:1;min-width:0}
+ .practice-panel{padding:22px}
+ .tip{font-size:15px;min-height:0;margin:12px 0 18px}
+ .chord small,.melody-heading,.study-heading>span{font-size:13px}
+ .chord strong{font-size:26px}
+ .chart-caption{font-size:12px}
+ #status,#beat-indicator{font-size:14px}
+ .transport button{min-height:50px;font-size:16px}
+ .settings label,.check{font-size:14px}
+ select,.settings select{font-size:16px;min-height:48px;padding:10px}
+ .slider-label input{min-height:44px}
+ .check{min-height:48px}
+ .check input{width:22px;height:22px}
+ .practice-note{font-size:13px}
+ .back{font-size:14px;min-height:48px}
+ .transport{position:sticky;top:8px;z-index:2;padding:8px 0;background:var(--panel)}
+}
+@media(pointer:coarse){
+ select,.settings select{font-size:16px;min-height:48px}
+ .settings label,.check{font-size:14px}
+ .transport button{font-size:16px;min-height:50px}
+ .study-nav button{min-height:52px}
+ .study-nav b{font-size:15px}
+ .slider-label input{min-height:44px}
+}
+@media(max-width:540px){
+ main{padding:16px max(16px,env(safe-area-inset-left)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-right))}
+ .study-picker{display:block}.study-picker label{display:block;margin-bottom:8px}
+ .practice-panel{padding:16px}.settings{grid-template-columns:minmax(0,1fr);gap:14px}
+ .settings .slider-label{grid-template-columns:1fr auto}.melody-heading{font-size:12px}
+ .chord strong{font-size:22px}.tip{font-size:14px}
+}
+.sound-help{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.6}
+.sound-help summary{display:flex;align-items:center;min-height:44px;cursor:pointer}
+.sound-help p{margin:0 0 12px;max-width:580px}
+.sound-help button{min-height:48px;font-size:16px}
+@media(min-width:1001px) and (max-height:900px){
+ main{padding:16px 24px 32px}.masthead{padding-bottom:12px;margin-bottom:8px}
+ .studio-heading{margin:8px 0 16px}.studio-heading h1{font-size:30px}.studio-heading .eyebrow{margin-bottom:6px}
+ .studio-grid{grid-template-columns:190px minmax(0,1fr);gap:16px}.practice-panel{padding:20px}
+ .tip{margin:10px 0 14px;min-height:0}#melody{max-height:140px}
+}
