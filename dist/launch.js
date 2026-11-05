@@ -36,5 +36,5 @@ document.querySelectorAll('[data-training]').forEach(button=>{
 // Original melodies over four-chord accompaniment.
 document.getElementById('vocal-etudes').onclick=()=>{window.location.href='etudes.html'};
 
-// Official hosted PJVI recordings with their original audio.
+// Original R&B practice with synchronized accompaniment and MIDI export.
 document.getElementById('pjvi-rnb').onclick=()=>{window.location.href='pjvi.html'};

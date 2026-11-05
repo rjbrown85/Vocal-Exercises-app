@@ -26,11 +26,15 @@ Open `etudes.html` through the home button. Harmony references are linked in its
 
 On iPad, tap Play to start audio. Interrupted or stalled audio returns to a restart prompt. **No sound? → Reset sound and play** creates a fresh audio session if playback remains silent. Tablet layouts use larger touch controls, with a compact etude selector in portrait and narrow windows.
 
-## PJVI official R&B recordings
+## Original R&B vocal exercises
 
-The home button **PPJI RMB Exercises** opens 20 official PJVI Vocal Studio recordings, with 12 tracks from Volume 1 and eight from Volume 2. Each exercise plays through the creator’s Bandcamp embed with its original audio, key, tempo, and accompaniment. PJVI is credited beside every recording, with links to the original track and both albums.
+The home button **PJVI** opens 20 original two-bar studies with piano melody, seventh-chord accompaniment, bass, and synchronized drums. The exercises develop major/minor pentatonic phrasing, small turns, syncopated entries, and short runs. They draw on broad teaching techniques visible in PJVI Vocal Studio’s public videos, with source links and clear attribution. They are not PJVI transcriptions or official recordings.
 
-Choose an exercise, then press Play inside its player. Previous/Next and a compact tablet selector switch exercises. Stop all removes the current player. Switching exercises or leaving the tab stops playback, and Reload recording restores the player. Pause whenever you need a breath. There are no added drums or app controls that alter the recording. Playback availability and listening limits remain controlled by Bandcamp. Internet access is required.
+Every bar ends in at least one full beat of vocal rest. Controls include key, register, tempo, repeats, extra breathing gaps, sing-together, listen-then-sing, and backing-only modes. Optional key movement climbs two semitones and returns. Each study has a suggested R&B pocket, neo-soul swing, or half-time groove. A single audio clock schedules all parts, including swing, so no manual synchronization is needed. Changing musical settings restarts the count-in. Stop and backgrounding cancel every part.
+
+**Download this practice as MIDI** exports the selected practice session, including tempo, transpositions, repeats, gaps, and all instruments. Files use Standard MIDI format 0, 480 ticks per quarter, piano channels 1–2, bass channel 3, and percussion channel 10. MIDI playback sounds depend on the destination player. Browser playback uses the app’s sampled piano and synthesized bass/drums, with no MIDI hardware or hosted audio player required. The shared audio player retains its iPad interruption and reset behavior.
+
+See [R&B implementation notes](notes/rnb-exercises.md).
 
 ## Run locally
 
