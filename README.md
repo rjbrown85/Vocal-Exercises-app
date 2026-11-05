@@ -26,6 +26,12 @@ Open `etudes.html` through the home button. Harmony references are linked in its
 
 On iPad, tap Play to start audio. Interrupted or stalled audio returns to a restart prompt. **No sound? → Reset sound and play** creates a fresh audio session if playback remains silent. Tablet layouts use larger touch controls, with a compact etude selector in portrait and narrow windows.
 
+## PJVI official R&B recordings
+
+The home button **PPJI RMB Exercises** opens 20 official PJVI Vocal Studio recordings, with 12 tracks from Volume 1 and eight from Volume 2. Each exercise plays through the creator’s Bandcamp embed with its original audio, key, tempo, and accompaniment. PJVI is credited beside every recording, with links to the original track and both albums.
+
+Choose an exercise, then press Play inside its player. Previous/Next and a compact tablet selector switch exercises. Stop all removes the current player. Switching exercises or leaving the tab stops playback, and Reload recording restores the player. Pause whenever you need a breath. There are no added drums or app controls that alter the recording. Playback availability and listening limits remain controlled by Bandcamp. Internet access is required.
+
 ## Run locally
 
 ```sh

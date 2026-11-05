@@ -35,3 +35,6 @@ document.querySelectorAll('[data-training]').forEach(button=>{
 
 // Original melodies over four-chord accompaniment.
 document.getElementById('vocal-etudes').onclick=()=>{window.location.href='etudes.html'};
+
+// Official hosted PJVI recordings with their original audio.
+document.getElementById('pjvi-rnb').onclick=()=>{window.location.href='pjvi.html'};
