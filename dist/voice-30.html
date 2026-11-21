@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F4EFE8">
+  <title>Voice 30 · Vocal Exercises</title>
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <style>
+    @font-face { font-family: Nunito; src: url("fonts/nunito-latin.woff") format("woff"); font-weight: 200 1000; font-display: swap }
+    :root {
+      color-scheme: light; --cream: #f4efe8; --ink: #2b2b2b; --muted: #645c55; --surface: #fcf7f0;
+      --coral: #eeb8ac; --peach: #f0c8a7; --lilac: #d9c8e6; --mint: #c6ddc9; --sky: #c4dbe8; --butter: #f0dfac;
+      --clay: 0 18px 36px rgba(0,0,0,.12), inset 0 -8px 14px rgba(0,0,0,.10), inset 0 8px 14px rgba(255,255,255,.7);
+      --button-shadow: 0 4px 7px #56443220, inset 0 2px 3px #fff9, inset 0 -3px 5px #67574718;
+      font: 650 16px/1.4 Nunito, ui-rounded, system-ui, sans-serif; color: var(--ink); background: var(--cream);
+    }
+    * { box-sizing: border-box }
+    [hidden] { display: none !important }
+    body { margin: 0; min-height: 100svh }
+    main { width: min(100% - 32px, 720px); margin: auto; padding: max(24px, env(safe-area-inset-top)) 0 max(28px, env(safe-area-inset-bottom)) }
+    button, select, textarea, a { color: inherit; font: inherit }
+    button, select, summary, a { -webkit-tap-highlight-color: transparent }
+    button, select, summary { cursor: pointer }
+    button, .pill { border: 0; border-radius: 999px; background: var(--surface); padding: 12px 20px; min-height: 46px; font-weight: 820; box-shadow: var(--button-shadow); transition: transform .15s, box-shadow .15s }
+    button:active, .pill:active { transform: scale(.96); box-shadow: inset 0 1px 5px #503c332d }
+    :focus-visible { outline: 3px solid #585092; outline-offset: 3px }
+    button:disabled { opacity: .53; cursor: default }
+    .primary { color: #fffaf5; background: #403735; box-shadow: 0 5px 8px #43352b30, inset 0 3px 4px #fff3, inset 0 -4px 6px #100e0e50 }
+    .primary:active { box-shadow: inset 0 1px 5px #241c1c90 }
+    a { text-decoration: none }
+    nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: clamp(16px,4vh,40px) }
+    .quiet { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 8px 6px; font-size: 15px; color: var(--muted); background: none; border: 0; box-shadow: none }
+    .quiet:hover { color: var(--ink); text-decoration: underline }
+    .icon { width: 18px; height: 18px; flex: none; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round }
+    .card { border-radius: 32px; background: var(--surface); box-shadow: var(--clay); padding: clamp(24px,5vw,46px) }
+    h1, h2, p { margin: 0 }
+    h1 { font-size: clamp(40px,7vw,65px); font-weight: 900; letter-spacing: -.065em; line-height: 1.04 }
+    h2 { font-size: 23px; letter-spacing: -.035em; line-height: 1.18 }
+    .topline, .row { display: flex; align-items: center; justify-content: space-between; gap: 14px }
+    .weekly { text-align: end; color: var(--muted); font-size: 14px }
+    .dots { display: flex; justify-content: flex-end; gap: 7px; margin-top: 5px }
+    .dots i { height: 12px; width: 12px; border-radius: 50%; background: #e6ded3; box-shadow: inset 0 2px 4px #78635341, 0 1px 0 white }
+    .dots i.filled { background: #917367; box-shadow: inset 0 2px 3px #fff7, 0 2px 3px #56443230 }
+    .home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(22px,5vw,52px); align-items: center; margin-top: 32px }
+    .dial { position: relative; display: grid; place-items: center; width: min(100%,252px); aspect-ratio: 1; margin: auto; border-radius: 50%; background: #f7f1e8;
+      box-shadow: 0 10px 18px #6c584825, inset 0 3px 5px #fff, inset 0 -5px 9px #6757472b }
+    .ring { position: absolute; inset: 7%; width: 86%; height: 86%; transform: rotate(-90deg); overflow: visible }
+    .readout { display: grid; place-items: center; position: relative; width: 72%; height: 72%; align-content: center; background: var(--surface); border-radius: 50%; box-shadow: inset 0 3px 8px #66534412, 0 1px 3px #fff }
+    .value { font-size: clamp(52px,8vw,78px); line-height: .99; font-weight: 850; letter-spacing: -.075em; font-variant-numeric: tabular-nums }
+    .unit { font-size: 17px; font-weight: 750; color: var(--muted) }
+    .options { display: grid; align-content: center }
+    .setting, summary { min-height: 56px; padding: 8px 0; border-bottom: 1px solid #6b574321 }
+    .switch { padding: 0; min-width: 50px; min-height: 44px; background: transparent; box-shadow: none; display: grid; align-items: center }
+    .track { width: 50px; height: 30px; display: flex; align-items: center; padding: 3px; background: #ddd4c8; border-radius: 30px; box-shadow: inset 0 2px 4px #4e423336 }
+    .track::after { content: ''; width: 24px; height: 24px; background: #fffaf3; border-radius: 50%; box-shadow: 0 2px 4px #382f2c48; transition: transform .15s }
+    .switch[aria-checked="true"] .track { background: #74635d }
+    .switch[aria-checked="true"] .track::after { transform: translateX(20px) }
+    summary { display: flex; align-items: center; justify-content: space-between; list-style: none; gap: 8px }
+    summary::-webkit-details-marker { display: none }
+    .range-value { color: var(--muted); font-size: 15px }
+    details[open] .chevron { transform: rotate(180deg) }
+    .chevron { width: 13px; height: 13px; margin-left: 6px }
+    .range-fields { display: flex; gap: 12px; padding: 12px 0 2px }
+    .range-fields label { flex: 1; color: var(--muted); font-size: 13px }
+    select { display: block; border: 1px solid #b2a597; border-radius: 10px; background: var(--surface); padding: 6px 8px; width: 100%; min-height: 44px; font-size: 16px }
+    #start { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: 22px; min-height: 56px; font-size: 19px }
+    .session { background: var(--phase); text-align: center }
+    .session h1 { font-size: clamp(36px,6vw,54px); margin-top: 6px }
+    .session .dial { margin: 22px auto 20px; width: clamp(158px,34vw,220px) }
+    .session .value { font-size: clamp(42px,7vw,62px) }
+    .session .readout { background: #fcf7f0 }
+    .phase-index, .detail { font-size: 14px; font-weight: 750 }
+    .cue { font-size: clamp(17px,3vw,21px); margin: 8px auto 0; max-width: 46ch; text-wrap: balance }
+    .detail { margin: 8px 0 0 }
+    .meter { margin: 10px auto 0; width: min(200px,60%); height: 12px; border-radius: 12px; background: #fff8; overflow: hidden }
+    .meter i { display: block; height: 100%; background: #445765; border-radius: inherit; transform-origin: left }
+    .choices { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 14px 0 0 }
+    .choices button { min-width: 44px; padding: 8px 14px }
+    [aria-pressed="true"] { background: #51433f; color: #fff }
+    .transport { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px }
+    .transport button { min-width: 108px }
+    .session-nav { position: sticky; top: 0; z-index: 2; padding: max(4px, env(safe-area-inset-top)) 4px 6px; background: var(--cream); margin-bottom: 12px }
+    .log-card { display: grid; gap: 24px }
+    fieldset { padding: 0; margin: 0; border: 0 }
+    legend, #note-label { font-weight: 800; margin-bottom: 6px }
+    #ratings { justify-content: space-between; flex-wrap: nowrap; margin: 6px 0 }
+    #ratings button { flex: 1; padding: 8px 0; min-width: 0 }
+    .ends { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px }
+    #check-form { display: grid; gap: 20px }
+    textarea { display: block; margin-top: 6px; width: 100%; min-height: 78px; padding: 12px; border: 1px solid #b2a597; border-radius: 16px; background: #fffaf5; resize: vertical }
+    #history { list-style: none; margin: 0; padding: 0 }
+    #history li { padding: 14px 0; border-bottom: 1px solid #6b574324 }
+    #history small, #empty, .water { color: var(--muted) }
+    #history p { overflow-wrap: anywhere; white-space: pre-wrap; margin-top: 4px }
+    .water { padding: 12px 16px; border-radius: 18px; background: #e4eced; display: flex; align-items: center; justify-content: space-between }
+    #water-time { font-variant-numeric: tabular-nums }
+    dialog { border: 0; width: min(390px,calc(100% - 32px)); color: var(--ink) }
+    dialog::backdrop { background: #3b30294a }
+    dialog p { margin: 14px 0 20px }
+    .error { color: #792817; margin-top: 10px }
+    @media (max-width: 570px) {
+      main { width: min(100% - 24px,430px) }
+      .card { padding: 26px 23px 28px }
+      .home-grid { grid-template-columns: 1fr; margin-top: 24px; gap: 20px }
+      .home-grid .dial { width: min(198px,58vw) }
+      nav { margin-bottom: 12px }
+      #start { margin-top: 16px }
+    }
+    @media (max-height: 680px) and (orientation: landscape) {
+      main { padding-top: 4px }
+      .session .dial { width: 115px; margin: 8px auto }
+      .session .value { font-size: 32px }
+    }
+    @media (prefers-reduced-motion: reduce) { *,*::after { transition: none !important } }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+    <symbol id="back" viewBox="0 0 24 24"><path d="m14 5-7 7 7 7"/></symbol>
+    <symbol id="book" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 4v16m3-12h4m-4 4h4"/></symbol>
+    <symbol id="down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+  </defs></svg>
+  <main>
+    <section id="home">
+      <nav aria-label="Practice navigation">
+        <a class="quiet" href="index.html"><svg class="icon" aria-hidden="true"><use href="#back"/></svg>Vocal Exercises</a>
+        <button id="open-log" class="quiet"><svg class="icon" aria-hidden="true"><use href="#book"/></svg>Log</button>
+      </nav>
+      <div class="card">
+        <div class="topline"><h1 id="home-title" tabindex="-1">Voice 30</h1>
+          <div class="weekly">This week<div id="dots" class="dots" role="img"><i></i><i></i><i></i><i></i></div></div>
+        </div>
+        <div class="home-grid">
+          <div class="dial">
+            <svg id="home-ring" class="ring" viewBox="0 0 100 100" aria-hidden="true"></svg>
+            <div class="readout"><span class="value" id="minutes">30</span><span class="unit">min</span></div>
+          </div>
+          <div class="options">
+            <div class="setting row"><span id="short-label">Short day</span><button id="short-day" class="switch" role="switch" aria-checked="false" aria-labelledby="short-label"><span class="track"></span></button></div>
+            <details id="range"><summary>Range<span class="range-value"><span id="range-label"></span><svg aria-hidden="true" class="icon chevron"><use href="#down"/></svg></span></summary>
+              <div class="range-fields"><label>Starting note<select id="low"></select></label><label>Top note<select id="high"></select></label></div>
+            </details>
+            <button id="start" class="primary"><span aria-hidden="true">▶</span> Start</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="session" hidden>
+      <nav class="session-nav" aria-label="Session controls"><b>Voice 30</b><button id="stop">Stop</button></nav>
+      <div id="phase-card" class="card session">
+        <p id="phase-index" class="phase-index"></p><h1 id="phase-title" tabindex="-1"></h1>
+        <div class="dial"><svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="45" fill="none" stroke="#e8dfd4" stroke-width="8"/><circle id="phase-ring" cx="50" cy="50" r="45" pathLength="100" fill="none" stroke="#74625c" stroke-width="8" stroke-linecap="round"/></svg>
+          <div class="readout"><span class="value" id="clock" role="timer" aria-label="Phase time remaining"></span></div>
+        </div>
+        <div aria-live="polite" aria-atomic="true"><h2 id="step-name"></h2><p class="cue" id="cue"></p></div>
+        <p id="detail" class="detail" hidden></p>
+        <div id="swell" class="meter" hidden><i></i></div>
+        <div id="hiss-counts" class="choices" role="group" aria-label="Exhale counts" hidden><button data-count="12">12</button><button data-count="16">16</button><button data-count="20">20</button></div>
+        <div class="transport"><button id="pattern" hidden>Play pattern</button><button id="next" class="primary">Next</button></div>
+        <p id="audio-error" class="error" role="alert" hidden></p>
+      </div>
+    </section>
+    <section id="log" hidden>
+      <nav aria-label="Practice navigation"><button id="return" class="quiet"><svg class="icon" aria-hidden="true"><use href="#back"/></svg><span id="return-label">Voice 30</span></button></nav>
+      <div class="card log-card">
+        <h1 id="log-title" tabindex="-1">Practice log</h1>
+        <p id="water" class="water" hidden>Water break <strong id="water-time"></strong></p>
+        <form id="check-form" hidden>
+          <fieldset><legend>Neck tension</legend><div id="ratings" class="choices"></div><div class="ends"><span>Relaxed</span><span>Tense</span></div></fieldset>
+          <label id="note-label">Note <textarea id="note" rows="2" maxlength="1000"></textarea></label>
+          <button id="save" class="primary" disabled>Save</button>
+        </form>
+        <div><h2 id="history-title" hidden>Past sessions</h2><p id="empty">No sessions yet.</p><ul id="history"></ul></div>
+      </div>
+    </section>
+    <p id="storage-error" class="error" role="alert" hidden></p>
+    <dialog id="stop-info" class="card" aria-labelledby="stop-title"><h2 id="stop-title">Session stopped</h2><p>Stop for fatigue, persistent hoarseness, scraping, or pain.</p><button id="dismiss-stop" class="primary">Done</button></dialog>
+  </main>
+  <script src="session.js"></script>
+  <script src="piano.js"></script>
+  <script src="synth.js"></script>
+  <script id="routine">
+    'use strict';
+    const phases = [
+      { name: 'Breath', color: 'coral', steps: [
+        ['reset', 60, 'Physical reset', 'Roll your shoulders, release your jaw, and rest a hand on your lower ribs.'],
+        ['hiss', 120, 'Steady hiss', 'Breathe in for 4, then hiss on “sss” for the selected count.'],
+        ['pulse', 120, 'Pulsed airflow', 'Take a low breath, pulse “shh” four times, then sustain it for 8.']
+      ] },
+      { name: 'SOVT', color: 'peach', steps: [
+        ['siren', 150, 'Straw or lip trill', 'Glide from low to high and back in one easy sweep.'],
+        ['scale', 150, 'Five-tone scale', 'Sing 1–2–3–4–5–4–3–2–1 on “vvv” or through a straw.']
+      ] },
+      { name: 'Mix', color: 'lilac', steps: [
+        ['arp', 210, 'Arpeggio', 'Sing 1–3–5–8–10–12–10–8–5–3–1 on a speech-like “nay” or “mum.”'],
+        ['octave', 210, 'Octave slide', 'Slide down an octave on “oo” or “ee.”']
+      ] },
+      { name: 'Closure', color: 'mint', steps: [
+        ['triad', 150, 'Staccato triad', 'Keep “guh” or “buh” short and bouncy on 1–3–5–3–1.'],
+        ['vowel', 150, 'Vowel change', 'Hold one pitch as you open from “gee” to “gah.”']
+      ] },
+      { name: 'Messa di voce', color: 'sky', steps: [
+        ['swell', 150, 'Mid-range swell', 'On “ah” or “oh,” grow louder for 3 seconds and softer for 3.'],
+        ['upper', 150, 'Upper-middle swell', 'Move a little higher and repeat with a smaller change in volume.']
+      ] },
+      { name: 'Cool-down', color: 'butter', steps: [
+        ['cool', 120, 'Descending slide', 'Slide gently down from your middle range on a straw or lip trill.'],
+        ['fry', 60, 'Release', 'Try a few seconds of quiet vocal fry, then rest.']
+      ] }
+    ];
+    const routes = { full: [0,1,2,3,4,5], short: [0,1,5] };
+    const intervals = {
+      scale: [0,2,4,5,7,5,4,2,0],
+      arp: [0,4,7,12,16,19,16,12,7,4,0],
+      triad: [0,4,7,4,0],
+      vowel: [0]
+    };
+    const phaseSeconds = phase => phase.steps.reduce((sum, step) => sum + step[1], 0);
+    const secondsFor = mode => routes[mode].reduce((sum, id) => sum + phaseSeconds(phases[id]), 0);
+    const noteNames = ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+    const noteName = midi => noteNames[midi % 12] + (Math.floor(midi / 12) - 1);
+    const clockText = seconds => Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+
+    function buildPhrase(id, low, high, repetition) {
+      const middle = Math.floor((low + high) / 2);
+      if (intervals[id]) {
+        const offsets = intervals[id];
+        const lastRoot = high - Math.max(...offsets);
+        const firstRoot = id === 'vowel' ? middle : low;
+        if (lastRoot < firstRoot) return null;
+        const root = firstRoot + repetition % (lastRoot - firstRoot + 1);
+        const beat = id === 'vowel' ? 4 : .42;
+        return { notes: offsets.map(n => root + n), beat, length: offsets.length * beat, piano: true };
+      }
+      if (id === 'octave' && high - low < 12) return null;
+      const slides = {
+        siren: [[low, high, low], [2.4, 2.4, .25]],
+        octave: [[high, high - 12], [2.6, .25]],
+        cool: [[middle, low], [3, .25]],
+        swell: [[middle], [150]],
+        upper: [[Math.min(high, middle + 3)], [150]]
+      };
+      if (!slides[id]) return null;
+      const [notes, durations] = slides[id];
+      return { notes, durations, length: durations.reduce((a, b) => a + b, 0), piano: false };
+    }
+
+    function countCue(id, seconds, hiss) {
+      const beat = Math.floor(seconds);
+      if (id === 'hiss') {
+        const cycle = 4 + hiss;
+        if (beat >= cycle * 4) return 'Rest';
+        const n = beat % cycle;
+        return n < 4 ? 'Inhale · ' + (n + 1) + ' / 4' : 'Hiss · ' + (n - 3) + ' / ' + hiss;
+      }
+      if (id === 'pulse') {
+        const n = beat % 16;
+        if (n < 4) return 'Inhale · ' + (n + 1) + ' / 4';
+        if (n < 8) return 'Shh · ' + (n - 3) + ' / 4';
+        return 'Sustain · ' + (n - 7) + ' / 8';
+      }
+      if (id === 'swell' || id === 'upper') return (beat % 6 < 3 ? 'Swell' : 'Taper') + ' · ' + (beat % 3 + 1) + ' / 3';
+      return '';
+    }
+
+    function weekCount(rows, now) {
+      const monday = new Date(now);
+      monday.setHours(0,0,0,0);
+      monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
+      return rows.filter(r => r.kind === 'Full' && r.finished >= +monday && r.finished <= +now).length;
+    }
+  </script>
+  <script>
+    'use strict';
+    const $ = id => document.getElementById(id);
+    const prefix = 'voice30.v1.';
+    const entryPrefix = prefix + 'entry.';
+    let prefs = { low: 45, high: 72, short: false };
+    let run = null, draft = null, waterUntil = 0, tickId = 0, resumedAt = null;
+    let ctx, piano, audioToken = 0, audioLoop = 0, audioState = 'off', playingRoot = '';
+    let wakeLock = null, wakePending = false;
+    const activeSounds = new Set();
+    const screens = ['home','session','log'];
+
+    function storageWarning(message) {
+      $('storage-error').textContent = message;
+      $('storage-error').hidden = false;
+    }
+    function readPref() {
+      try {
+        const v = JSON.parse(localStorage.getItem(prefix + 'settings'));
+        if (v && Number.isInteger(v.low) && Number.isInteger(v.high) && v.low >= 36 && v.high <= 84 && v.low < v.high) {
+          prefs = { low: v.low, high: v.high, short: v.short === true };
+        }
+      } catch { storageWarning('Settings are unavailable on this device.'); }
+    }
+    function savePrefs() {
+      try { localStorage.setItem(prefix + 'settings', JSON.stringify(prefs)); }
+      catch { storageWarning('Settings could not be saved on this device.'); }
+    }
+    function historyRows() {
+      const rows = [];
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (!key?.startsWith(entryPrefix)) continue;
+          try {
+            const row = JSON.parse(localStorage.getItem(key));
+            if (row && Number.isFinite(row.finished) && ['Full','Short','Partial'].includes(row.kind) &&
+                Number.isInteger(row.rating) && row.rating >= 1 && row.rating <= 5) rows.push(row);
+          } catch { /* A damaged entry does not hide other sessions. */ }
+        }
+      } catch { storageWarning('The practice log is unavailable on this device.'); }
+      return rows.sort((a,b) => b.finished - a.finished);
+    }
+    function persistTab() {
+      // Only paused time is saved. Returning after the tab is closed never adds practice time.
+      try { sessionStorage.setItem(prefix + 'tab', JSON.stringify({ run, draft, waterUntil })); }
+      catch { /* Timer and check-in still work while this page stays open. */ }
+    }
+    function restoreTab() {
+      try {
+        const v = JSON.parse(sessionStorage.getItem(prefix + 'tab'));
+        if (!v) return;
+        waterUntil = Number(v.waterUntil) || 0;
+        if (v.draft?.id && !localStorage.getItem(entryPrefix + v.draft.id)) draft = v.draft;
+        const r = v.run;
+        const phase = r && phases[routes[r.mode]?.[r.phase]];
+        if (!draft && phase?.steps[r.step] && Number.isFinite(r.elapsed) && Number.isFinite(r.seconds)) run = r;
+      } catch { /* Start fresh if tab storage is unavailable. */ }
+    }
+    function show(id, focusId) {
+      for (const name of screens) $(name).hidden = name !== id;
+      window.scrollTo(0, 0);
+      if (focusId) $(focusId).focus({ preventScroll: true });
+    }
+    function drawHome() {
+      const mode = prefs.short ? 'short' : 'full';
+      $('minutes').textContent = secondsFor(mode) / 60;
+      $('short-day').setAttribute('aria-checked', String(prefs.short));
+      $('range-label').textContent = noteName(prefs.low) + ' – ' + noteName(prefs.high);
+      $('low').value = prefs.low;
+      $('high').value = prefs.high;
+      for (const option of $('low').options) option.disabled = Number(option.value) >= prefs.high;
+      for (const option of $('high').options) option.disabled = Number(option.value) <= prefs.low;
+      const count = weekCount(historyRows(), Date.now());
+      const label = count + ' of 4 full sessions this week';
+      $('dots').setAttribute('aria-label', label);
+      $('dots').title = label;
+      Array.from($('dots').children).forEach((dot,i) => dot.classList.toggle('filled', i < count));
+      const ring = $('home-ring');
+      ring.replaceChildren();
+      let offset = 0;
+      for (const id of routes[mode]) {
+        const span = 100 * phaseSeconds(phases[id]) / secondsFor(mode);
+        const arc = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        const attrs = {cx:50,cy:50,r:44,pathLength:100,fill:'none',stroke:'var(--' + phases[id].color + ')','stroke-width':10,'stroke-dasharray':(span - 1.25) + ' ' + (100 - span + 1.25),'stroke-dashoffset':-offset};
+        for (const [k,v] of Object.entries(attrs)) arc.setAttribute(k,v);
+        ring.append(arc);
+        offset += span;
+      }
+    }
+    function goHome() { drawHome(); show('home','home-title'); }
+    function phaseNow() { return phases[routes[run.mode][run.phase]]; }
+    function stepNow() { return phaseNow().steps[run.step]; }
+    function stepElapsed() {
+      return run.elapsed + (resumedAt === null ? 0 : (performance.now() - resumedAt) / 1000);
+    }
+    function syncTimer() {
+      if (run && resumedAt !== null) run.elapsed = stepElapsed();
+      resumedAt = null;
+    }
+    function releaseWake() {
+      const lock = wakeLock;
+      wakeLock = null;
+      if (lock) lock.release().catch(() => {});
+    }
+    async function keepAwake() {
+      if (!navigator.wakeLock || !run || document.hidden || wakeLock || wakePending) return;
+      wakePending = true;
+      try {
+        const lock = await navigator.wakeLock.request('screen');
+        if (!run || document.hidden) { await lock.release(); return; }
+        wakeLock = lock;
+        lock.addEventListener('release', () => { if (wakeLock === lock) wakeLock = null; });
+      } catch { /* Device or browser settings can disallow a wake lock. */ }
+      finally { wakePending = false; }
+    }
+    function stopAudio() {
+      audioToken++;
+      clearInterval(audioLoop);
+      audioState = 'off';
+      playingRoot = '';
+      for (const source of activeSounds) { try { source.fadeOut(); } catch { /* Already ended. */ } }
+      activeSounds.clear();
+      Sound.release(80);
+      $('pattern').textContent = 'Play pattern';
+      $('pattern').setAttribute('aria-pressed','false');
+    }
+    function track(source) {
+      activeSounds.add(source);
+      source.addEventListener('ended', () => activeSounds.delete(source), {once:true});
+    }
+    function audioError(message) {
+      $('audio-error').textContent = message;
+      $('audio-error').hidden = !message;
+    }
+    async function toggleAudio() {
+      if (audioState !== 'off') { stopAudio(); return; }
+      const token = ++audioToken;
+      const id = stepNow()[0];
+      const {low, high} = prefs;
+      const first = buildPhrase(id, low, high, 0);
+      if (!first) return;
+      audioError('');
+      audioState = 'loading';
+      $('pattern').textContent = 'Loading…';
+      $('pattern').setAttribute('aria-pressed','true');
+      try {
+        Sound.hold();
+        if (!ctx || ctx.state === 'closed') {
+          ctx = new (window.AudioContext || window.webkitAudioContext)();
+          piano = new SamplePiano(ctx, ctx.destination);
+          ctx.onstatechange = () => {
+            if (audioState === 'on' && ctx.state !== 'running') stopAudio();
+          };
+        }
+        await ctx.resume();
+        if (token !== audioToken) return;
+        if (first.piano) await piano.load();
+        if (token !== audioToken) return;
+        audioState = 'on';
+        $('pattern').textContent = 'Stop sound';
+        let nextAt = ctx.currentTime + .04, repetition = 0;
+        function schedule() {
+          if (token !== audioToken || !run || document.hidden) return;
+          if (nextAt > ctx.currentTime + .12) return;
+          try {
+            const phrase = buildPhrase(id, low, high, repetition++);
+            const start = Math.max(nextAt, ctx.currentTime + .015);
+            if (phrase.piano) {
+              phrase.notes.forEach((note, i) => {
+                const duration = phrase.beat * (id === 'triad' ? .36 : .86);
+                track(piano.play(note, start + i * phrase.beat, duration, .48, id === 'triad' ? .10 : .20));
+              });
+            } else {
+              track(SlideSynth.play(ctx, ctx.destination, phrase.notes, phrase.durations, start));
+            }
+            playingRoot = phrase.piano ? noteName(phrase.notes[0]) : '';
+            const isDrone = id === 'swell' || id === 'upper';
+            nextAt = start + phrase.length + (isDrone ? 0 : .95);
+          } catch { stopAudio(); audioError('Sound stopped. Tap Play pattern to retry.'); }
+        }
+        schedule();
+        if (token === audioToken) audioLoop = setInterval(schedule, 80);
+      } catch {
+        if (token === audioToken) { stopAudio(); audioError('Sound unavailable. Tap Play pattern to retry.'); }
+      }
+    }
+    function paintTime() {
+      if (!run) return;
+      const phase = phaseNow();
+      const [id, duration] = stepNow();
+      const elapsed = Math.min(duration, stepElapsed());
+      const remaining = duration - elapsed + phase.steps.slice(run.step + 1).reduce((s,x) => s + x[1], 0);
+      const timeLabel = clockText(Math.ceil(remaining));
+      if ($('clock').textContent !== timeLabel) $('clock').textContent = timeLabel;
+      $('phase-ring').setAttribute('stroke-dasharray', (100 * remaining / phaseSeconds(phase)) + ' 100');
+      const detail = countCue(id, Math.max(0, elapsed - (id === 'hiss' ? run.hissOffset : 0)), run.hiss) || playingRoot;
+      $('detail').hidden = !detail;
+      if ($('detail').textContent !== detail) $('detail').textContent = detail;
+      if (!$('swell').hidden) {
+        const level = 1 - Math.abs(1 - (elapsed % 6) / 3);
+        const scale = .12 + (id === 'upper' ? .55 : .88) * level;
+        $('swell').firstElementChild.style.transform = 'scaleX(' + scale + ')';
+      }
+    }
+    function presentStep(focusPhase = false) {
+      const phase = phaseNow(), [id, , name, cue] = stepNow();
+      $('phase-card').style.setProperty('--phase', 'var(--' + phase.color + ')');
+      $('phase-index').textContent = 'Phase ' + (run.phase + 1) + ' of ' + routes[run.mode].length;
+      $('phase-title').textContent = phase.name;
+      $('step-name').textContent = name;
+      $('cue').textContent = cue;
+      $('hiss-counts').hidden = id !== 'hiss';
+      for (const b of $('hiss-counts').children) b.setAttribute('aria-pressed', String(+b.dataset.count === run.hiss));
+      $('swell').hidden = id !== 'swell' && id !== 'upper';
+      const pitched = !['reset','hiss','pulse','fry'].includes(id);
+      $('pattern').hidden = !pitched;
+      $('pattern').disabled = pitched && !buildPhrase(id, prefs.low, prefs.high, 0);
+      audioError($('pattern').disabled ? 'This pattern needs a wider range.' : '');
+      $('next').textContent = run.phase === routes[run.mode].length - 1 && run.step === phase.steps.length - 1 ? 'Finish' : 'Next';
+      paintTime();
+      if (focusPhase) $('phase-title').focus({ preventScroll: true });
+    }
+    function advance(manual) {
+      if (!run) return;
+      syncTimer();
+      const duration = stepNow()[1];
+      run.seconds += Math.min(duration, run.elapsed);
+      // Next acknowledges an early ending; only a fully timed routine earns a weekly dot.
+      if (manual && run.elapsed < duration - .25) run.partial = true;
+      const overflow = manual ? 0 : Math.max(0, run.elapsed - duration);
+      stopAudio();
+      run.step++;
+      let newPhase = false;
+      if (run.step >= phaseNow().steps.length) { run.phase++; run.step = 0; newPhase = true; }
+      if (run.phase >= routes[run.mode].length) { finishRun(); return; }
+      run.elapsed = overflow;
+      if (!document.hidden) resumedAt = performance.now();
+      presentStep(newPhase);
+      persistTab();
+    }
+    function tick() {
+      if (!run || document.hidden || resumedAt === null) return;
+      while (run && stepElapsed() >= stepNow()[1]) advance(false);
+      if (run) paintTime();
+    }
+    function startTicker() {
+      clearInterval(tickId);
+      if (document.hidden || !run) return;
+      resumedAt = performance.now();
+      tickId = setInterval(tick, 125);
+      keepAwake();
+    }
+    function startRun() {
+      if (draft) { openLog(); return; }
+      run = {mode:prefs.short ? 'short' : 'full', phase:0, step:0, seconds:0, elapsed:0, hiss:12, hissOffset:0, partial:false};
+      waterUntil = 0;
+      show('session');
+      presentStep(true);
+      startTicker();
+      persistTab();
+    }
+    function endTimer() {
+      clearInterval(tickId);
+      resumedAt = null;
+      stopAudio();
+      releaseWake();
+      run = null;
+    }
+    function finishRun() {
+      const finished = Date.now();
+      const kind = run.partial ? 'Partial' : run.mode === 'short' ? 'Short' : 'Full';
+      draft = {id: crypto.randomUUID?.() || (finished + '-' + Math.random().toString(36).slice(2)),
+        finished, kind, seconds: Math.round(run.seconds), rating:0, note:''};
+      waterUntil = finished + 120000;
+      endTimer();
+      persistTab();
+      openLog();
+    }
+    function stopRun() {
+      endTimer();
+      persistTab();
+      goHome();
+      $('stop-info').showModal();
+    }
+    function paintWater() {
+      const seconds = Math.ceil((waterUntil - Date.now()) / 1000);
+      $('water').hidden = seconds <= 0;
+      if (seconds > 0) $('water-time').textContent = clockText(seconds);
+    }
+    function drawLog() {
+      $('log-title').textContent = draft ? 'Check-in' : 'Practice log';
+      $('check-form').hidden = !draft;
+      $('return-label').textContent = draft ? 'Skip check-in' : 'Voice 30';
+      if (draft) {
+        $('note').value = draft.note;
+        for (const button of $('ratings').children) button.setAttribute('aria-pressed', String(Number(button.value) === draft.rating));
+        $('save').disabled = !draft.rating;
+      }
+      const rows = historyRows();
+      $('empty').hidden = rows.length > 0 || Boolean(draft);
+      $('history-title').hidden = !draft || !rows.length;
+      const items = rows.map(row => {
+        const item = document.createElement('li');
+        const line = document.createElement('strong');
+        line.textContent = new Date(row.finished).toLocaleDateString(undefined, {month:'short',day:'numeric',year:'numeric'}) + ' · ' + row.kind;
+        const meta = document.createElement('small');
+        meta.textContent = Math.round(row.seconds / 60) + ' min · Tension ' + row.rating + '/5';
+        item.append(line, document.createElement('br'), meta);
+        if (row.note) {
+          const note = document.createElement('p');
+          note.textContent = row.note;
+          item.append(note);
+        }
+        return item;
+      });
+      $('history').replaceChildren(...items);
+      paintWater();
+    }
+    function openLog() { drawLog(); show('log','log-title'); }
+
+    function background() { syncTimer(); clearInterval(tickId); stopAudio(); releaseWake(); persistTab(); }
+
+    readPref();
+    restoreTab();
+    for (const id of ['low','high']) {
+      for (let note = 36; note <= 84; note++) $(id).add(new Option(noteName(note), note));
+      $(id).onchange = () => { prefs[id] = Number($(id).value); savePrefs(); drawHome(); };
+    }
+    for (let i = 1; i <= 5; i++) {
+      const b = document.createElement('button');
+      b.type = 'button'; b.value = i; b.textContent = i;
+      b.onclick = () => { draft.rating = i; persistTab(); drawLog(); };
+      $('ratings').append(b);
+    }
+    $('short-day').onclick = () => { prefs.short = !prefs.short; savePrefs(); drawHome(); };
+    $('start').onclick = startRun;
+    $('open-log').onclick = openLog;
+    $('return').onclick = () => {
+      draft = null;
+      persistTab();
+      goHome();
+    };
+    $('pattern').onclick = toggleAudio;
+    $('next').onclick = () => advance(true);
+    $('stop').onclick = stopRun;
+    $('dismiss-stop').onclick = () => $('stop-info').close();
+    for (const b of $('hiss-counts').children) b.onclick = () => { run.hiss = +b.dataset.count; run.hissOffset = stepElapsed(); presentStep(); persistTab(); };
+    $('note').oninput = () => { draft.note = $('note').value; persistTab(); };
+    $('check-form').onsubmit = e => {
+      e.preventDefault();
+      if (!draft?.rating) return;
+      try { localStorage.setItem(entryPrefix + draft.id, JSON.stringify(draft)); }
+      catch { storageWarning('Your check-in could not be saved. Free browser storage and try again.'); return; }
+      draft = null;
+      $('storage-error').hidden = true;
+      persistTab();
+      openLog();
+    };
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) background();
+      else if (run && resumedAt === null) startTicker();
+      else if (!$('home').hidden) drawHome();
+    });
+    window.addEventListener('pagehide', background);
+    window.addEventListener('pageshow', e => { if (e.persisted && run && resumedAt === null) startTicker(); });
+    window.addEventListener('storage', e => {
+      if (!e.key || e.key.startsWith(entryPrefix)) {
+        if (!$('home').hidden) drawHome();
+        if (!$('log').hidden) drawLog();
+      }
+    });
+    setInterval(() => { if (!$('log').hidden && !$('water').hidden) paintWater(); }, 250);
+    if (run) { show('session'); presentStep(); startTicker(); }
+    else if (draft) openLog();
+    else drawHome();
+  </script>
+</body>
+</html>

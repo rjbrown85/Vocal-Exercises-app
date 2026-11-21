@@ -14,6 +14,14 @@ Controls include live tempo, metronome, direction, repeats, hold key, sing toget
 
 The training studies use common vocal tasks with original note arrangements and instructions. They are not song transcriptions or branded routines. Belting focuses on moderate-volume foundations. Choose a comfortable range for each task. See [practice notes and references](dist/practice-notes.html).
 
+## Voice 30
+
+[Voice 30](dist/voice-30.html) guides a 30-minute routine or a 13-minute short day (Breath, SOVT, and Cool-down). Tap **Play pattern** for the current drill. Pitched drills stay within the selected range. A pattern wider than the range stays silent. Switching away pauses the routine and stops sound.
+
+The weekly goal counts four fully timed, full-length sessions, starting Monday in local time. Short and manually shortened sessions can also be logged. Stop discards the session. The two-minute water break begins at check-in. Tension ratings and notes stay in this browser.
+
+The interface uses a local Latin subset of [Nunito](https://github.com/google/fonts/tree/main/ofl/nunito), distributed under the [SIL Open Font License](dist/fonts/Nunito-OFL.txt).
+
 ## Vocal Etudes
 
 The home screen includes **Vocal Etudes**, a separate piano-backed practice space with 20 four-bar progressions and 10 original studies per progression (200 arrangements). The first three are I–V–vi–IV, vi–IV–I–V, and I–vi–IV–V. Seven additional pop progressions include common rotations, a ii-chord turnaround, and a folk-pop loop.
