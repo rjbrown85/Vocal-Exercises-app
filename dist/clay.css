@@ -1,0 +1,128 @@
+@font-face {
+  font-family: Nunito;
+  src: url("fonts/nunito-latin.woff") format("woff");
+  font-weight: 200 1000;
+  font-display: swap;
+}
+
+:root, :root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #1c1b18;
+  --surface: #2c2a27;
+  --ink: #f7f2e9;
+  --muted: #c8bfb3;
+  --edge: #504a42;
+  --warm: #f5bc96;
+  --well: #22211f;
+  --clay-face: linear-gradient(150deg, #373430 0%, #2e2b28 53%, #292724 100%);
+  --clay-raised: inset 0 2px 3px #ffffff24, inset 1px 0 3px #ffffff09,
+    inset 0 -6px 10px #0b09084d, 0 9px 17px -7px #000c, 0 2px 3px #0006;
+  --clay-control: inset 0 2px 2px #ffffff21, inset 0 -3px 5px #0005, 0 3px 6px #0005;
+  --clay-inset: inset 0 3px 7px #0007, 0 1px 1px #ffffff14;
+  --accent-shadow: inset 0 2px 3px #fffc, inset 0 -4px 6px #7948294a, 0 4px 9px #0005;
+  font-family: Nunito, ui-rounded, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.exercise-app, .exercise-app:has(#landing:not([hidden])), .exercise-app:has(#home:not([hidden])),
+.voice-app, .reference-page {
+  background: radial-gradient(ellipse at 50% 0%, #292622 0%, var(--paper) 65%);
+  min-height: 100svh;
+}
+.exercise-app .ambient { display: none }
+.exercise-app :is(h1,h2,.exercise-trigger), .voice-app :is(h1,h2) { font-weight: 850 }
+.exercise-app :is(button,select,input), .voice-app :is(button,select,textarea) { font-family: inherit }
+.exercise-app .mast { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap }
+.exercise-app .brand-note { width: 44px; height: 44px; border-radius: 14px; box-shadow: var(--clay-control); object-fit: cover; flex: none }
+.exercise-app #splash { background: var(--paper) }
+.exercise-app #splash img { width: clamp(100px,24vw,152px); height: auto; border-radius: 26%; box-shadow: var(--clay-raised) }
+.mode-link, .voice-app a.mode-link {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px;
+  padding: 9px 16px; border-radius: 999px; border: 1px solid #ffffff12; background: var(--clay-face);
+  color: var(--ink); box-shadow: var(--clay-control); font-weight: 800; font-size: 14px; text-decoration: none;
+}
+.mode-link:hover { filter: brightness(1.1) }
+.mode-link:active { box-shadow: var(--clay-inset) }
+main:has(#landing:not([hidden])) .routine-shortcut { display: none }
+.exercise-app :focus-visible, .voice-app :focus-visible { outline: 3px solid #a4d1f0; outline-offset: 4px }
+
+/* One featured routine, two broad choices, then four technique tiles. */
+.exercise-app main:has(#landing:not([hidden])) {
+  max-width: 992px; width: 100%; margin: 0 auto; height: auto; min-height: 100svh; justify-content: center;
+  padding: clamp(28px,6vh,64px) clamp(18px,4vw,46px);
+}
+.exercise-app main:has(#landing:not([hidden])) > header { margin-bottom: clamp(22px,4vh,44px) }
+.exercise-app main:has(#landing:not([hidden])) .mast { justify-content: center }
+.exercise-app main:has(#landing:not([hidden])) h1 { font-size: clamp(28px,4.4vw,46px); font-weight: 900; letter-spacing: -.055em }
+.exercise-app #landing {
+  display: grid; grid-template-columns: repeat(8,minmax(0,1fr)); grid-template-rows: none;
+  grid-auto-rows: auto; align-items: stretch; gap: clamp(12px,1.8vw,20px);
+}
+#landing .training-card, #home .banks button, #home .banks button[data-bank=fundamentals] {
+  background: var(--clay-face); border: 1px solid #ffffff13; box-shadow: var(--clay-raised);
+  color: var(--ink); -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+#landing .training-card {
+  grid-column: span 2; text-decoration: none; height: auto; min-height: 126px; aspect-ratio: auto;
+  padding: 18px 10px; gap: 12px; border-radius: 26px; font-weight: 800; font-size: clamp(16px,1.75vw,20px);
+  line-height: 1.15; text-wrap: balance;
+}
+#landing .training-card:nth-child(2) { grid-column: 2 / span 3 }
+#landing .training-card:nth-child(3) { grid-column: 5 / span 3 }
+#landing .training-card:nth-child(4) { grid-column: 1 / span 2 }
+#landing .training-card:nth-child(2), #landing .training-card:nth-child(3) {
+  flex-direction: row; min-height: 94px; gap: 14px; padding: 16px;
+}
+#landing .training-card svg, #home .banks button .bank-icon {
+  width: 58px; height: 46px; padding: 9px; border-radius: 15px;
+  color: var(--training-color,var(--bank,var(--warm))); background: #252320; box-shadow: var(--clay-inset);
+}
+#landing .training-card#voice-30 {
+  grid-column: 3 / span 4; flex-direction: row; justify-content: flex-start; text-align: left; gap: 16px;
+  min-height: 90px; padding: 16px 24px; font-size: clamp(23px,3vw,32px); font-weight: 900; letter-spacing: -.035em;
+  background: linear-gradient(145deg,#46392f,#322c27 70%,#2c2824); border-color: #8e6e5120;
+}
+#voice-30 svg { stroke-width: 4px }
+#landing #voice-30 .launch-arrow { margin-left: auto; color: var(--warm); font-size: 23px; font-weight: 650 }
+@media (hover:hover) {
+  #landing .training-card:hover, #home .banks button:hover { border-color: var(--training-color,var(--bank,var(--warm))); filter: brightness(1.08) }
+}
+#landing .training-card:active, #home .banks button:active { transform: scale(.97); box-shadow: var(--clay-inset) }
+#home .banks button, #home .banks button[data-bank=fundamentals] { border-radius: 24px; aspect-ratio: auto; min-height: 112px }
+#home .banks button .bank-text { opacity: 1 }
+#home .banks button b { font-weight: 800 }
+#home .banks button .bank-text small { color: var(--muted) }
+
+.exercise-app .workspace {
+  background: var(--clay-face); border: 1px solid #ffffff15; border-radius: 28px;
+  box-shadow: var(--clay-raised); -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.exercise-app .workspace .controls { background: #292724; border-color: #484339; border-radius: 0 28px 28px 0 }
+.exercise-app :is(.visual,#breath-visual) { border-radius: 18px; box-shadow: var(--clay-inset) }
+.exercise-app :is(.practice-heading,.warmups-heading,.transport) button, .exercise-app .menu-trigger:not(.exercise-trigger) {
+  border-radius: 999px; box-shadow: var(--clay-control); background: var(--clay-face); color: var(--ink)
+}
+.exercise-app .transport .play { background: var(--accent); color: #25211c; box-shadow: var(--accent-shadow); font-weight: 900 }
+.exercise-app .transport button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: var(--well); box-shadow: var(--clay-inset) }
+.exercise-app .transport button:active { transform: scale(.98) }
+.exercise-app .exercise-trigger { font-weight: 800 }
+.exercise-app .stepper, .exercise-app .seg { border-radius: 14px; background: var(--well); box-shadow: var(--clay-inset) }
+.exercise-app .seg button[aria-pressed="true"] { border-radius: 10px; box-shadow: var(--clay-control) }
+.reference-page main { font-family: inherit }
+.reference-page a { color: var(--warm) }
+@media (max-width: 680px) {
+  .exercise-app main:has(#landing:not([hidden])) { width: min(100%,480px); justify-content: flex-start; padding-top: max(26px,env(safe-area-inset-top)) }
+  .exercise-app main:has(#landing:not([hidden])) > header { margin-bottom: 24px }
+  .exercise-app #landing { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px }
+  #landing .training-card:nth-child(n) { grid-column: auto; flex-direction: column; min-height: 104px; gap: 8px; padding: 13px 8px; border-radius: 22px }
+  #landing .training-card#voice-30 { grid-column: 1 / -1; min-height: 78px; flex-direction: row; padding: 12px 20px }
+  #landing .training-card svg { width: 52px; height: 40px }
+  .exercise-app .mast .routine-shortcut { padding: 6px 12px }
+}
+@media (max-width: 699px), (min-width:700px) and (max-width:1100px) and (orientation:portrait) and (min-height:900px) {
+  .exercise-app .workspace .controls { border-radius: 0 0 28px 28px }
+}
+@media (prefers-reduced-motion: reduce) {
+  #landing .training-card, #home .banks button { transition: none }
+}

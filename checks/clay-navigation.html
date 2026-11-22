@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Practice navigation check</title>
+<output id="result">Running</output>
+<iframe title="Practice app" style="border:0;height:760px"></iframe>
+<script>
+(async () => {
+  const frame = document.querySelector('iframe');
+  const result = document.querySelector('output');
+  const doc = () => frame.contentDocument;
+  const one = id => doc().getElementById(id);
+  const assert = (condition, message) => { if (!condition) throw Error(message); };
+  async function navigate(action) {
+    const loaded = new Promise(resolve => frame.addEventListener('load', resolve, {once:true}));
+    action();
+    await loaded;
+    await doc().fonts.ready;
+  }
+  function layout(width, expectedRows) {
+    frame.style.width = width + 'px';
+    const win = frame.contentWindow;
+    const tiles = Array.from(one('landing').children);
+    const rows = new Map();
+    for (const tile of tiles) {
+      const rect = tile.getBoundingClientRect();
+      assert(rect.width >= 44 && rect.left >= 0 && rect.right <= win.innerWidth, 'Tile outside viewport at ' + width);
+      const y = Math.round(rect.top);
+      rows.set(y, (rows.get(y) || 0) + 1);
+    }
+    assert([...rows.values()].join() === expectedRows, 'Unexpected tile rows at ' + width + ': ' + [...rows.values()]);
+    assert(win.getComputedStyle(tiles[0]).boxShadow.includes('inset'), 'Missing clay finish');
+    assert(win.getComputedStyle(tiles[0]).fontFamily.includes('Nunito'), 'Missing shared typeface');
+  }
+  try {
+    await navigate(() => { frame.src = '../dist/index.html'; });
+    const home = doc().querySelector('main');
+    if (home.inert) one('splash').dispatchEvent(new Event('pointerdown'));
+    assert(doc().querySelector('.brand-note').naturalWidth > 0, 'Missing note artwork');
+    layout(390,'1,2,2,2');
+    layout(820,'1,2,4');
+    layout(1100,'1,2,4');
+    one('general-warmups').click();
+    doc().querySelector('[data-bank="intervals"]').click();
+    assert(!one('practice').hidden && one('category-title').textContent === 'Intervals', 'Warmup player did not open');
+    const link = doc().querySelector('.routine-shortcut');
+    assert(link.getBoundingClientRect().height >= 44, 'No Voice 30 shortcut in player');
+    await navigate(() => link.click());
+    const win = frame.contentWindow;
+    assert(win.getComputedStyle(doc().documentElement).colorScheme === 'dark', 'Light scheme in Voice 30');
+    const choose = mode => doc().querySelector('[data-mode="' + mode + '"]').click();
+    choose('short');
+    assert(one('minutes').textContent === '13', 'Short duration');
+    choose('custom');
+    assert(one('start').disabled, 'Empty custom selection started');
+    for (const id of [2,5]) one('phase-list').querySelector('input[value="' + id + '"]').click();
+    assert(one('minutes').textContent === '10', 'Custom duration');
+    one('start').click();
+    assert(one('phase-title').textContent === 'Mix', 'Wrong first selected phase');
+    one('next').click();
+    assert(one('step-name').textContent === 'Octave slide', 'Skip step did not advance');
+    one('jump').value = '1';
+    one('jump').dispatchEvent(new win.Event('change'));
+    assert(one('phase-title').textContent === 'Cool-down', 'Jump missed its target');
+    one('stop').click();
+    assert(one('stop-info').open, 'Stop did not end the session');
+    one('dismiss-stop').click();
+    await navigate(() => doc().querySelector('a.mode-link').click());
+    assert(one('landing').children.length === 7, 'Return link did not open the seven choices');
+    result.textContent = 'Passed';
+  } catch (err) { result.textContent = String(err.stack || err); }
+})();
+</script>
+</html>

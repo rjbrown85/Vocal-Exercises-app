@@ -1,6 +1,6 @@
 # Vocal Exercises
 
-A minimal piano-backed vocal practice app with 172 exercises, a dark theme, and responsive phone, tablet, and desktop layouts.
+A piano-backed practice app with 172 exercises and the Voice 30 guided routine. All seven practice areas share dark, raised clay controls and the locally bundled Nunito typeface.
 
 ## Practice
 
@@ -16,33 +16,11 @@ The training studies use common vocal tasks with original note arrangements and 
 
 ## Voice 30
 
-[Voice 30](dist/voice-30.html) guides a 30-minute routine or a 13-minute short day (Breath, SOVT, and Cool-down). Tap **Play pattern** for the current drill. Pitched drills stay within the selected range. A pattern wider than the range stays silent. Switching away pauses the routine and stops sound.
+[Voice 30](dist/voice-30.html) offers Full (30 min), Short (13 min), and Custom. Custom plays your selected phases in routine order and shows their total time. Use **Skip step** for the next drill or **Jump to phase** to move forward or back within the session. Tap **Play pattern** for the current drill. Pitched drills stay within the selected range. A pattern wider than the range stays silent. Switching away pauses the routine and stops sound.
 
-The weekly goal counts four fully timed, full-length sessions, starting Monday in local time. Short and manually shortened sessions can also be logged. Stop discards the session. The two-minute water break begins at check-in. Tension ratings and notes stay in this browser.
+The weekly goal counts four fully timed, full-length sessions, starting Monday in local time. Short, custom, and manually shortened sessions can also be logged. Jumping between phases records the session as Partial. Stop discards the session. The two-minute water break begins at check-in. Tension ratings and notes stay in this browser.
 
 The interface uses a local Latin subset of [Nunito](https://github.com/google/fonts/tree/main/ofl/nunito), distributed under the [SIL Open Font License](dist/fonts/Nunito-OFL.txt).
-
-## Vocal Etudes
-
-The home screen includes **Vocal Etudes**, a separate piano-backed practice space with 20 four-bar progressions and 10 original studies per progression (200 arrangements). The first three are I–V–vi–IV, vi–IV–I–V, and I–vi–IV–V. Seven additional pop progressions include common rotations, a ii-chord turnaround, and a folk-pop loop.
-
-Ten additional progressions draw on David Bennett’s teaching, including Royal Road, the Andalusian cadence, and minor or borrowed-chord loops. Each study uses chord-tone targets, nearby scale notes matched to the harmony, simple rhythmic variations, and marked breaths. Every bar ends with at least one full beat of vocal rest. Shaded breath marks and a timed “Breathe now” cue remain active in all practice modes, including when no extra gap is selected. Melody spans stay within an octave, with no adjacent jump larger than a fourth. The ten styles range from long ballad phrases to syncopated entries and short eighth-note runs. No song transcription, lyrics, or artist imitation is used. These short musical building blocks can still resemble existing music by coincidence.
-
-Controls include all 12 tonic choices in the progression’s major or minor key, three octave registers, 50–150 BPM, 1–4 rounds, breathing gaps, a metronome, and held, broken, or pulsed piano accompaniment. Practice with melody and chords, listen then sing over the same backing, or choose chords only. The displayed range describes the melody, not the accompaniment. Key and tempo changes restart with a four-beat count-in. Leaving the tab stops playback. Preferences use a separate local-storage key and do not change existing warmup settings.
-
-Open `etudes.html` through the home button. Harmony references are linked in its **About the music & references** section. See [implementation and validation notes](notes/vocal-etudes.md).
-
-On iPad, tap Play to start audio. Interrupted or stalled audio returns to a restart prompt. **No sound? → Reset sound and play** creates a fresh audio session if playback remains silent. Tablet layouts use larger touch controls, with a compact etude selector in portrait and narrow windows.
-
-## Original R&B vocal exercises
-
-The home button **PJVI** opens 20 original two-bar studies with piano melody, seventh-chord accompaniment, bass, and synchronized drums. The exercises develop major/minor pentatonic phrasing, small turns, syncopated entries, and short runs. They draw on broad teaching techniques visible in PJVI Vocal Studio’s public videos, with source links and clear attribution. They are not PJVI transcriptions or official recordings.
-
-Every bar ends in at least one full beat of vocal rest. Controls include key, register, tempo, repeats, extra breathing gaps, sing-together, listen-then-sing, and backing-only modes. Optional key movement climbs two semitones and returns. Each study has a suggested R&B pocket, neo-soul swing, or half-time groove. A single audio clock schedules all parts, including swing, so no manual synchronization is needed. Changing musical settings restarts the count-in. Stop and backgrounding cancel every part.
-
-**Download this practice as MIDI** exports the selected practice session, including tempo, transpositions, repeats, gaps, and all instruments. Files use Standard MIDI format 0, 480 ticks per quarter, piano channels 1–2, bass channel 3, and percussion channel 10. MIDI playback sounds depend on the destination player. Browser playback uses the app’s sampled piano and synthesized bass/drums, with no MIDI hardware or hosted audio player required. The shared audio player retains its iPad interruption and reset behavior.
-
-See [R&B implementation notes](notes/rnb-exercises.md).
 
 ## Run locally
 
